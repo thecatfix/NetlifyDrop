@@ -1,0 +1,37 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run HTML validation
+      uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+      with:
+        root: .
+        css: true
+    
+    - name: Security Headers Check
+      run: |
+        echo "Checking netlify.toml for security headers..."
+        grep -q "X-Frame-Options" netlify.toml && echo "✓ X-Frame-Options found" || echo "✗ X-Frame-Options missing"
+        grep -q "X-XSS-Protection" netlify.toml && echo "✓ X-XSS-Protection found" || echo "✗ X-XSS-Protection missing"
+        grep -q "X-Content-Type-Options" netlify.toml && echo "✓ X-Content-Type-Options found" || echo "✗ X-Content-Type-Options missing"
+        grep -q "Content-Security-Policy" netlify.toml && echo "✓ CSP found" || echo "✗ CSP missing"
+    
+    - name: Check for exposed secrets
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: ${{ github.event.repository.default_branch }}
+        head: HEAD
