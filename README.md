@@ -1,5 +1,7 @@
 # NetlifyDrop
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f2e92d38-ebf1-4cd4-98e2-d5cf1e1f39dd/deploy-status)](https://app.netlify.com/projects/unique-chebakia-a8ff2a/deploys)
+
 ## Overview
 A simple static site hosting repository designed to work with Netlify's continuous deployment. Drop your HTML files here and they'll be automatically deployed.
 
@@ -22,7 +24,7 @@ A simple static site hosting repository designed to work with Netlify's continuo
 - No sensitive data should be committed
 
 ## Live Site
-Deployed at: [Your Netlify URL]
+Deployed at: https://unique-chebakia-a8ff2a.netlify.app
 
 ## License
 MIT
