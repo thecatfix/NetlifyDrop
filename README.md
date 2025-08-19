@@ -24,7 +24,7 @@ A simple static site hosting repository designed to work with Netlify's continuo
 - No sensitive data should be committed
 
 ## Live Site
-Deployed at: https://unique-chebakia-a8ff2a.netlify.app
+Deployed at: https://shelburne.netlify.app (Password Protected)
 
 ## License
 MIT
