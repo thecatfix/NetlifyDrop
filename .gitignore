@@ -44,3 +44,5 @@ coverage/
 *.pfx
 secrets/
 private/
+# Local Netlify folder
+.netlify
