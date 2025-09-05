@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" class="theme-dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Katana — Rebuild</title>
+
+  <!-- Use existing consolidated stylesheet -->
+  <link rel="stylesheet" href="./styles.css">
+
+  <style>
+    .layout{display:grid;grid-template-columns:260px 1fr;gap:32px}
+    @media (max-width:1024px){.layout{grid-template-columns:1fr}.toc{display:none}}
+    .surface{background:#151821;border:1px solid #232736;border-radius:12px}
+    .section-title{margin:0 0 12px;border-bottom:1px solid #232736;padding-bottom:8px}
+    .kv{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:720px){.kv{grid-template-columns:1fr}}
+    .kv .card{padding:16px;border:1px solid #232736;border-radius:10px;background:#0f1115}
+    .evo-table{width:100%;border-collapse:collapse}
+    .evo-table th,.evo-table td{padding:10px 12px;border-bottom:1px solid #232736;text-align:left}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#1a1f2b;border:1px solid #2a3242;color:#9fb2c8;font-size:.8rem}
+    .diagram{background:#0f1115;border:1px solid #232736;border-radius:12px;padding:12px}
+    .muted{color:#9aa0aa}
+    .toc{position:sticky;top:80px;max-height:calc(100vh - 100px);overflow:auto;padding:24px}
+    .toc h4{margin-bottom:16px;color:#c9d1d9}
+    .toc a{display:block;padding:6px 0;color:#9aa0aa;text-decoration:none}
+    .toc a.active{color:#fff;font-weight:600}
+    .toc a:hover{color:#58a6ff}
+    .share{margin-top:16px}
+    .chip{display:inline-block;padding:4px 12px;margin:4px 8px 4px 0;border-radius:16px;background:#1a1f2b;border:1px solid #2a3242;color:#9fb2c8;font-size:0.85rem}
+    .rebuild-nav{background:var(--term-bg-secondary);border:1px solid #232736;padding:16px 24px;margin-bottom:32px;border-radius:8px}
+  </style>
+</head>
+<body>
+  <nav class="nav surface rebuild-nav">
+    <a class="nav-brand" href="./index.html">Katana</a>
+    <div>
+      <a class="nav-link" href="./index.html#story">Story</a>
+      <a class="nav-link nav-link--active" href="#">Rebuild</a>
+      <a class="nav-link" href="./index.html#vision">Vision</a>
+      <a class="nav-link" href="./index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main class="container layout">
+    <!-- TOC -->
+    <aside class="toc surface">
+      <h4>On this page</h4>
+      <a href="#summary" class="active">Executive summary</a>
+      <a href="#architecture">Architecture diagram</a>
+      <a href="#evolution">Evolution highlights</a>
+      <a href="#pipeline">Signal → Liquidity → Execution</a>
+    </aside>
+
+    <!-- CONTENT -->
+    <article class="blog-post surface" style="padding:32px">
+      <!-- Executive Summary -->
+      <section id="summary" class="blog-post-content">
+        <h1 class="section-title">Rebuild: Fundamentals + Agents</h1>
+        <div class="kv">
+          <div class="card">
+            <strong>Overall impact</strong><br/>
+            58% code reuse, 40× efficiency, 91% accuracy, ~95% infra cost reduction.
+          </div>
+          <div class="card">
+            <strong>Build philosophy</strong><br/>
+            Domain-driven design core, extended with AI agents; liquidity solved via ETF proxies and execution feasibility checks.
+          </div>
+        </div>
+        <p class="muted" style="margin-top:12px">Not AI slop — fundamentals first, then agentic leverage.</p>
+      </section>
+
+      <!-- Diagram -->
+      <section id="architecture" class="blog-post-content" style="margin-top:48px">
+        <h2 class="section-title">Architecture diagram</h2>
+        <div class="diagram">
+          <div style="background:#0d1117;padding:32px;text-align:center;color:#9aa0aa;border:2px dashed #232736;border-radius:8px">
+            <div style="font-family:var(--font-mono);font-size:14px;line-height:1.8">
+              <div>┌─────────────────────────────────────────────────────────┐</div>
+              <div>│                    KATANA PLATFORM                     │</div>
+              <div>├─────────────────────────────────────────────────────────┤</div>
+              <div>│  SIGNALS           LIQUIDITY          EXECUTION        │</div>
+              <div>│                                                         │</div>
+              <div>│  100k+ bonds  →    ETF proxies   →    Agent checks     │</div>
+              <div>│  ML models         Feasibility       Trade validation  │</div>
+              <div>│  Reversion prob    Score calc        Risk assessment   │</div>
+              <div>└─────────────────────────────────────────────────────────┘</div>
+            </div>
+          </div>
+        </div>
+        <p class="muted">High-level system showing signals, liquidity discovery, and execution checks routed through agents.</p>
+      </section>
+
+      <!-- Evolution table -->
+      <section id="evolution" class="blog-post-content" style="margin-top:48px">
+        <h2 class="section-title">Evolution highlights</h2>
+        <table class="evo-table">
+          <thead>
+            <tr><th>Area</th><th>From → To</th><th>Preserved</th><th>Gain</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Neural networks</td>
+              <td>Spark MLlib → PyTorch Siamese</td>
+              <td><span class="pill">~40% reuse</span></td>
+              <td><span class="pill">Pretrained weight compat.</span></td>
+            </tr>
+            <tr>
+              <td>Service layer</td>
+              <td>55-class services → streamlined + ETF enh.</td>
+              <td><span class="pill">~70% interfaces</span></td>
+              <td><span class="pill">Fallback patterns</span></td>
+            </tr>
+            <tr>
+              <td>Data pipeline</td>
+              <td>Bloomberg/IHS → iShares/SEC N-PORT (+ streaming)</td>
+              <td><span class="pill">~55% core algo</span></td>
+              <td><span class="pill">Throughput ↑</span></td>
+            </tr>
+            <tr>
+              <td>Scoring engine</td>
+              <td>Spark distributed → Python native (mem-opt.)</td>
+              <td><span class="pill">~65% logic</span></td>
+              <td><span class="pill">~10× faster</span></td>
+            </tr>
+            <tr>
+              <td>Streaming arch</td>
+              <td>— → real-time stream processing</td>
+              <td><span class="pill">New</span></td>
+              <td><span class="pill">~90% mem ↓</span></td>
+            </tr>
+            <tr>
+              <td>Compression calc</td>
+              <td>Spark algo → Python native + streaming</td>
+              <td><span class="pill">~75% preserved</span></td>
+              <td><span class="pill">Lower latency</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="muted">All metrics from internal evolution summary.</p>
+      </section>
+
+      <!-- Pipeline narrative -->
+      <section id="pipeline" class="blog-post-content" style="margin-top:48px">
+        <h2 class="section-title">Signal → Liquidity → Execution</h2>
+        <p>We scan 100k+ bonds, model mean-reversion, map ETF liquidity as a proxy, then run agentic execution checklists to ensure trades are actually doable.</p>
+        <div class="code-block syntax-highlight" style="margin:24px 0">
+          <span class="code-line"><span class="keyword">for</span> bond_pair <span class="keyword">in</span> universe(100000):</span>
+          <span class="code-line code-line--no-prompt">    p = model.reversion_probability(bond_pair)   <span class="comment"># deep learning</span></span>
+          <span class="code-line code-line--no-prompt">    liq = etf_proxy.liquidity_score(bond_pair)   <span class="comment"># ETF as liquidity</span></span>
+          <span class="code-line code-line--no-prompt">    <span class="keyword">if</span> feasible(liq) <span class="keyword">and</span> p &gt; threshold:</span>
+          <span class="code-line code-line--no-prompt">        agent.execute_checklist(bond_pair)       <span class="comment"># agentic execution checks</span></span>
+        </div>
+        <div class="share">
+          <span class="chip">Institutional DNA</span>
+          <span class="chip">Agentic leverage</span>
+          <span class="chip">Cost-efficient scale</span>
+        </div>
+        <div style="margin-top:24px">
+          <a href="./index.html#vision" class="btn btn--primary">See vision</a>
+          <a href="https://www.johnshelburne.com" target="_blank" rel="noopener" class="btn btn--secondary">Get in touch</a>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
