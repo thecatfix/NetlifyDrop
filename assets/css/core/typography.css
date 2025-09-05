@@ -1,0 +1,64 @@
+/* typography.css - Font Definitions */
+body {
+  background: var(--term-bg);
+  color: var(--term-text);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--term-accent);
+  font-family: var(--font-mono);
+  font-weight: normal;
+  margin-bottom: var(--space-sm);
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: var(--space-md);
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+p {
+  margin-bottom: var(--space-sm);
+}
+
+a {
+  color: var(--term-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--term-success);
+  text-decoration: underline;
+}
+
+code {
+  background: var(--term-bg-secondary);
+  color: var(--term-success);
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--term-bg-secondary);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  margin-bottom: var(--space-sm);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}

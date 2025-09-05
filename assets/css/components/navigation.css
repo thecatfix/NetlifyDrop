@@ -1,0 +1,46 @@
+/* navigation.css - Nav Elements */
+.nav {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--term-bg-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.nav-link {
+  color: var(--term-text);
+  text-decoration: none;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background: var(--term-bg-secondary);
+  color: var(--term-accent);
+}
+
+.nav-link--active {
+  background: var(--term-bg-secondary);
+  color: var(--term-accent);
+}
+
+.nav-brand {
+  color: var(--term-accent);
+  font-weight: bold;
+  margin-right: auto;
+}
+
+.breadcrumb {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  font-size: 0.9em;
+  color: var(--term-text);
+}
+
+.breadcrumb-separator::before {
+  content: ">";
+  color: var(--term-accent);
+  margin: 0 var(--space-xs);
+}

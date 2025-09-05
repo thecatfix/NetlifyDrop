@@ -1,0 +1,52 @@
+/* terminal.css - Terminal Windows */
+.terminal-window {
+  background: var(--term-bg);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  font-family: var(--font-mono);
+  box-shadow: var(--shadow-terminal);
+  margin-bottom: var(--space-lg);
+}
+
+.terminal-header {
+  display: flex;
+  gap: var(--dot-gap);
+  margin-bottom: var(--space-sm);
+}
+
+.terminal-dot {
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+}
+
+.terminal-dot--close {
+  background: var(--term-error);
+}
+
+.terminal-dot--minimize {
+  background: var(--term-warning);
+}
+
+.terminal-dot--maximize {
+  background: var(--term-success);
+}
+
+.terminal-content {
+  color: var(--term-text);
+}
+
+.terminal-prompt::before {
+  content: var(--prompt-symbol);
+  color: var(--term-accent);
+  margin-right: var(--space-xs);
+}
+
+.cursor {
+  animation: blink var(--cursor-blink) infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}

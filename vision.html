@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en" class="theme-dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Katana — Vision</title>
+
+  <!-- Use existing consolidated stylesheet -->
+  <link rel="stylesheet" href="./styles.css">
+
+  <style>
+    .vision-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .video-hero {
+      background: var(--term-bg-secondary);
+      border: 1px solid #232736;
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+    
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 24px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0d1117;
+      border: 2px solid #232736;
+    }
+    
+    .video-container video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .video-placeholder {
+      aspect-ratio: 16/9;
+      background: #0d1117;
+      border: 2px dashed #232736;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #9aa0aa;
+      font-family: var(--font-mono);
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+    
+    .stat-card {
+      background: var(--term-bg-secondary);
+      border: 1px solid #232736;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    
+    .stat-number {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--term-accent);
+      margin-bottom: 8px;
+      font-family: var(--font-mono);
+    }
+    
+    .stat-label {
+      color: var(--term-text);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .demo-section {
+      background: var(--term-bg-secondary);
+      border: 1px solid #232736;
+      border-radius: 16px;
+      padding: 32px;
+    }
+    
+    .demo-title {
+      color: var(--term-accent);
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .demo-description {
+      color: var(--term-text);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+    
+    .feature-card {
+      background: #0f1115;
+      border: 1px solid #232736;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+    
+    .feature-title {
+      color: var(--term-accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .feature-description {
+      color: var(--term-text);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    
+    .cta-section {
+      text-align: center;
+      padding: 48px 32px;
+      background: var(--term-bg-secondary);
+      border: 1px solid #232736;
+      border-radius: 16px;
+    }
+    
+    .vision-nav {
+      background: var(--term-bg-secondary);
+      border: 1px solid #232736;
+      padding: 16px 24px;
+      margin-bottom: 32px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav surface vision-nav">
+    <a class="nav-brand" href="./index.html">Katana</a>
+    <div>
+      <a class="nav-link" href="https://www.catfix.biz/katana" target="_blank" rel="noopener">Story</a>
+      <a class="nav-link" href="./rebuild.html">Rebuild</a>
+      <a class="nav-link nav-link--active" href="#">Vision</a>
+      <a class="nav-link" href="https://www.johnshelburne.com" target="_blank" rel="noopener">Contact</a>
+    </div>
+  </nav>
+
+  <main class="container vision-layout">
+    <!-- Video Hero Section -->
+    <section class="video-hero">
+      <h1 style="color: var(--term-accent); font-size: 2.5rem; margin-bottom: 16px;">
+        See Katana in Action
+      </h1>
+      <p style="color: var(--term-text); font-size: 1.1rem; margin-bottom: 32px;">
+        Live demonstration of HYG bond analysis and signal generation
+      </p>
+      
+      <div class="video-container">
+        <video controls preload="metadata" poster="./assets/images/video-poster.jpg">
+          <source src="./assets/videos/hyg-demo.mp4" type="video/mp4">
+          <div class="video-placeholder">
+            <div style="font-size: 3rem; margin-bottom: 16px;">🎬</div>
+            <div style="font-size: 1.2rem; margin-bottom: 8px;">Your browser doesn't support video playback</div>
+            <div style="font-size: 0.9rem; opacity: 0.7;">
+              <a href="./assets/videos/hyg-demo.mp4" style="color: var(--term-accent);">Download HYG Demo (24MB MP4)</a>
+            </div>
+          </div>
+        </video>
+      </div>
+    </section>
+
+    <!-- Performance Stats -->
+    <section class="demo-section">
+      <h2 class="demo-title">Performance Metrics</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">100k+</span>
+          <span class="stat-label">Bonds Analyzed</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">91%</span>
+          <span class="stat-label">Accuracy Rate</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">40×</span>
+          <span class="stat-label">Efficiency Gain</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">&lt;4GB</span>
+          <span class="stat-label">Memory Usage</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">&lt;10min</span>
+          <span class="stat-label">Processing Time</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">95%</span>
+          <span class="stat-label">Cost Reduction</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- What You're Seeing -->
+    <section class="demo-section">
+      <h2 class="demo-title">What You're Seeing</h2>
+      <p class="demo-description">
+        The HYG Test demonstrates Katana's real-time bond analysis capabilities, 
+        showing how our platform processes thousands of fixed income instruments 
+        to identify arbitrage opportunities and generate actionable trading signals.
+      </p>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">Real-time Analysis</div>
+          <div class="feature-description">
+            Live processing of bond pricing data with instant signal generation
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <div class="feature-title">ETF Proxy Mapping</div>
+          <div class="feature-description">
+            Using ETF liquidity as proxy for underlying bond tradability
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <div class="feature-title">AI-Powered Scoring</div>
+          <div class="feature-description">
+            Deep learning models predicting mean-reversion probabilities
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-title">Execution Validation</div>
+          <div class="feature-description">
+            Automated feasibility checks before signal transmission
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <h2 style="color: var(--term-accent); font-size: 2rem; margin-bottom: 16px;">
+        Ready to Transform Your Trading?
+      </h2>
+      <p style="color: var(--term-text); font-size: 1.1rem; margin-bottom: 32px;">
+        See how Katana can revolutionize your fixed income trading operations
+      </p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="./rebuild.html" class="btn btn--primary btn--large">
+          Technical Details
+        </a>
+        <a href="https://www.johnshelburne.com" target="_blank" rel="noopener" class="btn btn--secondary btn--large">
+          Schedule Demo
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

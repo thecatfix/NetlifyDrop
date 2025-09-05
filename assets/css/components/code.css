@@ -1,0 +1,50 @@
+/* code.css - Code Blocks */
+.code-block {
+  background: var(--term-bg-secondary);
+  padding: var(--space-sm);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.code-line {
+  display: block;
+  padding: 2px 0;
+}
+
+.code-line::before {
+  content: var(--prompt-symbol);
+  color: var(--term-accent);
+  margin-right: var(--space-xs);
+}
+
+.code-line--no-prompt::before {
+  content: none;
+}
+
+.syntax-highlight {
+  /* Syntax highlighting colors */
+}
+
+.syntax-highlight .keyword {
+  color: var(--term-accent);
+}
+
+.syntax-highlight .string {
+  color: var(--term-success);
+}
+
+.syntax-highlight .comment {
+  color: var(--term-warning);
+  font-style: italic;
+}
+
+.syntax-highlight .number {
+  color: var(--term-error);
+}
+
+.syntax-highlight .function {
+  color: var(--term-accent);
+}
