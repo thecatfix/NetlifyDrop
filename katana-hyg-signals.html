@@ -178,59 +178,89 @@
         .table-container {
             background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
-            overflow: hidden;
+            overflow: auto;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
         }
         
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 1.3rem;
         }
         
         thead {
-            background: rgba(0, 0, 0, 0.3);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 100%);
             position: sticky;
             top: 0;
             z-index: 10;
         }
         
-        th {
-            padding: 1.2rem 1rem;
+        .header-main th {
+            padding: 1.4rem 1rem;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #01a8b5;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(1, 168, 181, 0.05);
+        }
+        
+        .header-sub th {
+            padding: 1rem 0.8rem;
             text-align: left;
             font-weight: 600;
             font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.7);
             border-bottom: 2px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
             user-select: none;
             white-space: nowrap;
+            transition: all 0.2s ease;
         }
         
-        th:hover {
+        .header-sub th:hover {
             background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.87);
+            color: #01a8b5;
         }
         
         th.sorted {
-            color: #01a8b5;
+            color: #00d4e4;
+            background: rgba(1, 168, 181, 0.1);
         }
         
         tbody tr {
             transition: all 0.2s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+        
+        tbody tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.01);
         }
         
         tbody tr:hover {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(1, 168, 181, 0.08);
+            transform: scale(1.01);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
         
         td {
-            padding: 1rem;
+            padding: 1.2rem 0.8rem;
             font-size: 1.3rem;
             color: rgba(255, 255, 255, 0.87);
+            vertical-align: middle;
         }
+        
+        /* Column specific widths */
+        td:nth-child(1) { width: 60px; text-align: center; }
+        td:nth-child(3), td:nth-child(8) { max-width: 200px; }
+        td:nth-child(4), td:nth-child(9) { width: 80px; text-align: right; }
+        td:nth-child(5), td:nth-child(10) { width: 80px; text-align: right; }
+        td:nth-child(6), td:nth-child(11) { width: 60px; text-align: center; }
         
         /* Cell Styles */
         .priority {
@@ -373,7 +403,7 @@
         <div class="header">
             <h1>Katana HYG Bond Signals</h1>
             <div class="header-info">
-                <div><strong>Generated:</strong> 2025-09-08 17:36:36 UTC</div>
+                <div><strong>Generated:</strong> 2025-09-08 18:02:31 UTC</div>
                 <div><strong>Total Signals:</strong> <span id="totalSignals">50</span></div>
                 <div><strong>Data Source:</strong> BlackRock HYG ETF Holdings</div>
             </div>
@@ -428,27 +458,22 @@
         <div class="table-container">
             <table id="signalsTable">
                 <thead>
-                    <tr>
-                        <th onclick="sortTable(0)">#</th>
-                        <th colspan="4">Buy Side</th>
-                        <th colspan="4">Sell Side</th>
-                        <th colspan="5">Metrics</th>
+                    <tr class="header-main">
+                        <th rowspan="2" onclick="sortTable(0)" style="vertical-align: middle; text-align: center; width: 60px;">#</th>
+                        <th colspan="3" style="text-align: center; border-right: 2px solid rgba(255, 255, 255, 0.1);">BUY SIDE</th>
+                        <th colspan="3" style="text-align: center; border-right: 2px solid rgba(255, 255, 255, 0.1);">SELL SIDE</th>
+                        <th colspan="3" style="text-align: center;">METRICS</th>
                     </tr>
-                    <tr>
-                        <th onclick="sortTable(0)">Priority</th>
-                        <th onclick="sortTable(1)">Ticker</th>
-                        <th onclick="sortTable(2)">Description</th>
-                        <th onclick="sortTable(3)">Price</th>
-                        <th onclick="sortTable(4)">YTM</th>
-                        <th onclick="sortTable(5)">Ticker</th>
-                        <th onclick="sortTable(6)">Description</th>
-                        <th onclick="sortTable(7)">Price</th>
-                        <th onclick="sortTable(8)">YTM</th>
-                        <th onclick="sortTable(9)">Price Diff</th>
-                        <th onclick="sortTable(10)">Yield Diff</th>
-                        <th onclick="sortTable(11)">Signal</th>
-                        <th onclick="sortTable(12)">Confidence</th>
-                        <th onclick="sortTable(13)">Matches</th>
+                    <tr class="header-sub">
+                        <th colspan="3" onclick="sortTable(1)" style="min-width: 300px;">Bond Details</th>
+                        <th onclick="sortTable(2)" style="text-align: center;">YTM</th>
+                        <th onclick="sortTable(3)" style="text-align: center; border-right: 2px solid rgba(255, 255, 255, 0.1);">Rating</th>
+                        <th colspan="3" onclick="sortTable(4)" style="min-width: 300px;">Bond Details</th>
+                        <th onclick="sortTable(5)" style="text-align: center;">YTM</th>
+                        <th onclick="sortTable(6)" style="text-align: center; border-right: 2px solid rgba(255, 255, 255, 0.1);">Rating</th>
+                        <th onclick="sortTable(7)" style="text-align: center;">Spread</th>
+                        <th onclick="sortTable(8)" style="text-align: center;">Signal</th>
+                        <th onclick="sortTable(9)" style="text-align: center;">Score</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -480,25 +505,55 @@
                 
                 const matchIndicator = (signal.duration_match ? '⏱ ' : '') + (signal.sector_match ? '🏢' : '');
                 
+                // Format description as single line: TICKER COUPON% MM/YY
+                const formatBondSingleLine = (ticker, desc, isin, price) => {
+                    // Extract coupon and date from description
+                    const couponMatch = desc.match(/(\d+\.?\d*)%/);
+                    const dateMatch = desc.match(/(\d{2})\/(\d{4})/);
+                    
+                    let coupon = couponMatch ? couponMatch[1] + '%' : '';
+                    let date = '';
+                    if (dateMatch) {
+                        const month = dateMatch[1];
+                        const year = dateMatch[2].substr(2); // Get last 2 digits of year
+                        date = month + '/' + year;
+                    }
+                    
+                    // Format as single line
+                    return `${ticker} ${coupon} ${date}<br><span style="font-size: 0.9rem; color: rgba(255,255,255,0.5);">ISIN: ${isin} | Price: $${price.toFixed(2)}</span>`;
+                };
+                
+                // Format signal strength badge
+                const signalBadge = signal.signal_strength === 'STRONG' 
+                    ? '<span style="background: linear-gradient(90deg, #a6e3a1, #94e2d5); padding: 0.3rem 0.8rem; border-radius: 6px; font-weight: 700; color: #1a1f2e;">STRONG</span>'
+                    : signal.signal_strength === 'MEDIUM'
+                    ? '<span style="background: #f9e2af; padding: 0.3rem 0.8rem; border-radius: 6px; font-weight: 600; color: #1a1f2e;">MEDIUM</span>'
+                    : '<span style="background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 6px;">WEAK</span>';
+                
                 row.innerHTML = `
-                    <td class="priority">${signal.priority}</td>
-                    <td class="ticker">${signal.buy_ticker}</td>
-                    <td class="description">${signal.buy_description}</td>
-                    <td class="price">${signal.buy_price.toFixed(2)}</td>
-                    <td class="ytm">${signal.buy_ytm.toFixed(2)}%</td>
-                    <td class="ticker">${signal.sell_ticker}</td>
-                    <td class="description">${signal.sell_description}</td>
-                    <td class="price">${signal.sell_price.toFixed(2)}</td>
-                    <td class="ytm">${signal.sell_ytm.toFixed(2)}%</td>
-                    <td class="price positive">${signal.price_diff.toFixed(2)}</td>
-                    <td class="ytm positive">${signal.yield_diff.toFixed(2)}%</td>
-                    <td class="signal-${signal.signal_strength.toLowerCase()}">${signal.signal_strength}</td>
-                    <td>
-                        <div class="confidence-bar">
-                            <div class="confidence-fill" style="width: ${signal.confidence}%"></div>
+                    <td class="priority" style="font-weight: 700; font-size: 1.5rem; color: #01a8b5;">${signal.priority}</td>
+                    <td colspan="3" style="padding: 0.8rem; line-height: 1.6;">
+                        <div style="font-weight: 600; color: #00d4e4; font-size: 1.3rem;">
+                            ${formatBondSingleLine(signal.buy_ticker, signal.buy_description, signal.buy_isin, signal.buy_price)}
                         </div>
                     </td>
-                    <td>${matchIndicator}</td>
+                    <td class="ytm" style="text-align: center; color: #f9e2af; font-weight: 700; font-size: 1.4rem;">${signal.buy_ytm.toFixed(1)}%</td>
+                    <td class="rating" style="text-align: center; font-size: 1.1rem; border-right: 2px solid rgba(255,255,255,0.05);">${signal.buy_rating || 'NR'}</td>
+                    <td colspan="3" style="padding: 0.8rem; line-height: 1.6;">
+                        <div style="font-weight: 600; color: #00d4e4; font-size: 1.3rem;">
+                            ${formatBondSingleLine(signal.sell_ticker, signal.sell_description, signal.sell_isin, signal.sell_price)}
+                        </div>
+                    </td>
+                    <td class="ytm" style="text-align: center; color: #f9e2af; font-weight: 700; font-size: 1.4rem;">${signal.sell_ytm.toFixed(1)}%</td>
+                    <td class="rating" style="text-align: center; font-size: 1.1rem; border-right: 2px solid rgba(255,255,255,0.05);">${signal.sell_rating || 'NR'}</td>
+                    <td class="spread" style="text-align: right; font-weight: 700; color: #a6e3a1;">${Math.round(signal.spread_compression)} <span style="font-size: 0.9rem; color: rgba(255,255,255,0.5);">bps</span></td>
+                    <td style="text-align: center;">${signalBadge}</td>
+                    <td style="text-align: center;">
+                        <div style="display: inline-block; background: rgba(1,168,181,0.2); border-radius: 8px; padding: 0.4rem 0.8rem; border: 1px solid rgba(1,168,181,0.3);">
+                            <span style="font-weight: 700; font-size: 1.4rem; color: #00d4e4;">${Math.round(signal.confidence)}</span>
+                            <span style="font-size: 0.9rem; color: rgba(255,255,255,0.5);">%</span>
+                        </div>
+                    </td>
                 `;
                 
                 tbody.appendChild(row);
@@ -509,9 +564,9 @@
         
         // Sorting function
         function sortTable(columnIndex) {
-            const columns = ['priority', 'buy_ticker', 'buy_description', 'buy_price', 'buy_ytm',
-                           'sell_ticker', 'sell_description', 'sell_price', 'sell_ytm',
-                           'price_diff', 'yield_diff', 'signal_strength', 'confidence', 'sector_match'];
+            const columns = ['priority', 'buy_ticker', 'buy_description', 'buy_price', 'buy_ytm', 'buy_rating',
+                           'sell_ticker', 'sell_description', 'sell_price', 'sell_ytm', 'sell_rating',
+                           'spread_compression', 'signal_strength', 'confidence'];
             
             const column = columns[columnIndex];
             
