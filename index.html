@@ -7,6 +7,277 @@
 
   <!-- Consolidated stylesheet -->
   <link rel="stylesheet" href="./styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Katana HYG Signals CSS -->
+  <style>
+    /* Katana Production CSS for Signals Dashboard */
+    .signals-dashboard {
+      background: linear-gradient(135deg, #1a1f2e 0%, #232B42 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .signals-header {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .signals-header h2 {
+      margin: 0 0 1rem 0;
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #01a8b5 0%, #00d4e4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .header-info {
+      display: flex;
+      gap: 3rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.3rem;
+    }
+    
+    .header-info strong {
+      color: rgba(255, 255, 255, 0.87);
+    }
+    
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+    
+    .stat-label {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-value {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #01a8b5;
+    }
+    
+    /* Controls */
+    .controls {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .search-box {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .search-box input {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      color: rgba(255, 255, 255, 0.87);
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+    }
+    
+    .search-box input:focus {
+      border-color: #01a8b5;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    
+    .filter-group {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .filter-group label {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.2rem;
+    }
+    
+    .filter-group select {
+      padding: 0.6rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      color: rgba(255, 255, 255, 0.87);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    
+    /* Table */
+    .table-container {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    #signalsTable {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    #signalsTable thead {
+      background: rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    #signalsTable th {
+      padding: 1.2rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.6);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    
+    #signalsTable th:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.87);
+    }
+    
+    #signalsTable th.sorted {
+      color: #01a8b5;
+    }
+    
+    #signalsTable tbody tr {
+      transition: all 0.2s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    
+    #signalsTable tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    #signalsTable td {
+      padding: 1rem;
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.87);
+    }
+    
+    /* Cell Styles */
+    .priority {
+      font-weight: 700;
+      color: #01a8b5;
+      text-align: center;
+    }
+    
+    .ticker {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.95);
+    }
+    
+    .description {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.2rem;
+    }
+    
+    .price {
+      font-weight: 600;
+      text-align: right;
+    }
+    
+    .ytm {
+      text-align: right;
+      color: #f9e2af;
+    }
+    
+    .positive {
+      color: #a6e3a1;
+    }
+    
+    .negative {
+      color: #f38ba8;
+    }
+    
+    .signal-strong {
+      background: linear-gradient(135deg, #a6e3a1 0%, #94e2d5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    
+    .signal-medium {
+      color: #f9e2af;
+      font-weight: 600;
+    }
+    
+    .signal-weak {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .confidence-bar {
+      width: 100px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .confidence-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #01a8b5 0%, #00d4e4 100%);
+      transition: width 0.3s ease;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1400px) {
+      .signals-dashboard {
+        padding: 1rem;
+      }
+      
+      .table-container {
+        overflow-x: auto;
+      }
+      
+      #signalsTable {
+        min-width: 1200px;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Top navigation -->
@@ -15,6 +286,7 @@
     <a class="nav-link nav-link--active" href="https://www.catfix.biz/katana" target="_blank" rel="noopener">Story</a>
     <a class="nav-link" href="./rebuild.html">Rebuild</a>
     <a class="nav-link" href="./vision.html">Vision</a>
+    <a class="nav-link" href="#signals">Live Signals</a>
     <a class="nav-link" href="#contact">Contact</a>
   </nav>
 
@@ -107,12 +379,227 @@
       <div class="stat"><span class="stat-number">Exec</span><span class="stat-label">Feasibility checked</span></div>
     </section>
 
+    <!-- Live HYG Bond Signals Dashboard -->
+    <section id="signals" class="signals-dashboard">
+      <div class="signals-header">
+        <h2>Katana HYG Bond Signals</h2>
+        <div class="header-info">
+          <div><strong>Generated:</strong> 2025-09-08 17:28:47 UTC</div>
+          <div><strong>Total Signals:</strong> <span id="totalSignals">50</span></div>
+          <div><strong>Data Source:</strong> BlackRock HYG ETF Holdings</div>
+        </div>
+      </div>
+      
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Avg Price Differential</div>
+          <div class="stat-value">$60.65</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Avg Yield Differential</div>
+          <div class="stat-value">45.51%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Avg Spread Compression</div>
+          <div class="stat-value">4543 bps</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Avg Confidence</div>
+          <div class="stat-value">100.0%</div>
+        </div>
+      </div>
+      
+      <!-- Controls -->
+      <div class="controls">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search by ticker, ISIN, or description...">
+        </div>
+        <div class="filter-group">
+          <label>Signal Strength:</label>
+          <select id="signalFilter">
+            <option value="">All</option>
+            <option value="STRONG">Strong</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="WEAK">Weak</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Min Confidence:</label>
+          <select id="confidenceFilter">
+            <option value="0">All</option>
+            <option value="50">50%+</option>
+            <option value="75">75%+</option>
+            <option value="90">90%+</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Table -->
+      <div class="table-container">
+        <table id="signalsTable">
+          <thead>
+            <tr>
+              <th onclick="sortTable(0)">#</th>
+              <th colspan="4">Buy Side</th>
+              <th colspan="4">Sell Side</th>
+              <th colspan="5">Metrics</th>
+            </tr>
+            <tr>
+              <th onclick="sortTable(0)">Priority</th>
+              <th onclick="sortTable(1)">Ticker</th>
+              <th onclick="sortTable(2)">Description</th>
+              <th onclick="sortTable(3)">Price</th>
+              <th onclick="sortTable(4)">YTM</th>
+              <th onclick="sortTable(5)">Ticker</th>
+              <th onclick="sortTable(6)">Description</th>
+              <th onclick="sortTable(7)">Price</th>
+              <th onclick="sortTable(8)">YTM</th>
+              <th onclick="sortTable(9)">Price Diff</th>
+              <th onclick="sortTable(10)">Yield Diff</th>
+              <th onclick="sortTable(11)">Signal</th>
+              <th onclick="sortTable(12)">Confidence</th>
+              <th onclick="sortTable(13)">Matches</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Data will be inserted here by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact" class="blog-post text-center">
-      <h2 class="blog-post-title">Let’s talk</h2>
+      <h2 class="blog-post-title">Let's talk</h2>
       <p class="blog-post-excerpt">Institutional credibility × AI leverage. Fundamentals, not shortcuts.</p>
       <a class="btn btn--primary btn--large" href="https://www.johnshelburne.com" target="_blank" rel="noopener">Contact</a>
     </section>
   </main>
+
+  <!-- Katana Signals JavaScript -->
+  <script>
+    // Signal data
+    const signalsData = [{"priority": 1, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CLARIOS", "sell_description": "CLARIOS 8.500% 05/2027 [144A]", "sell_price": 100.17, "sell_ytm": 2.25, "sell_isin": "US69867DAC20", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.6, "yield_diff": 47.75, "spread_compression": 4757.9, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 2, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CLARIOS", "sell_description": "CLARIOS 8.500% 05/2027 [144A]", "sell_price": 100.17, "sell_ytm": 2.25, "sell_isin": "US69867DAC20", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.27, "yield_diff": 47.75, "spread_compression": 4757.9, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 3, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "AG", "sell_description": "AG 8.630% 09/2027 [144A]", "sell_price": 102.52, "sell_ytm": 3.19, "sell_isin": "US00840KAA79", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 60.95, "yield_diff": 46.81, "spread_compression": 4664.3, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 4, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "AG", "sell_description": "AG 8.630% 09/2027 [144A]", "sell_price": 102.52, "sell_ytm": 3.19, "sell_isin": "US00840KAA79", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 60.62, "yield_diff": 46.81, "spread_compression": 4664.3, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 5, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SIRIUS", "sell_description": "SIRIUS 3.130% 09/2026 [144A]", "sell_price": 99.34, "sell_ytm": 3.81, "sell_isin": "US82967NBL10", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 57.77, "yield_diff": 46.19, "spread_compression": 4610.0, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 6, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SIRIUS", "sell_description": "SIRIUS 3.130% 09/2026 [144A]", "sell_price": 99.34, "sell_ytm": 3.81, "sell_isin": "US82967NBL10", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 57.440000000000005, "yield_diff": 46.19, "spread_compression": 4610.0, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 7, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "APTIV", "sell_description": "APTIV 6.880% 12/2054", "sell_price": 101.33, "sell_ytm": 4.28, "sell_isin": "US03837AAD28", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 68.66, "yield_diff": 45.72, "spread_compression": 4560.1, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 8, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "APTIV", "sell_description": "APTIV 6.880% 12/2054", "sell_price": 101.33, "sell_ytm": 4.28, "sell_isin": "US03837AAD28", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 66.46000000000001, "yield_diff": 45.72, "spread_compression": 4556.7, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 9, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "DANA", "sell_description": "DANA 4.250% 09/2030", "sell_price": 99.17, "sell_ytm": 4.44, "sell_isin": "US235825AH97", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 66.5, "yield_diff": 45.56, "spread_compression": 4547.5, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 10, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "DANA", "sell_description": "DANA 4.250% 09/2030", "sell_price": 99.17, "sell_ytm": 4.44, "sell_isin": "US235825AH97", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 64.30000000000001, "yield_diff": 45.56, "spread_compression": 4544.1, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 11, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "UNITED", "sell_description": "UNITED 3.880% 11/2027", "sell_price": 98.66, "sell_ytm": 4.52, "sell_isin": "US911365BM59", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 65.99, "yield_diff": 45.48, "spread_compression": 4543.8, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 12, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "UNITED", "sell_description": "UNITED 3.880% 11/2027", "sell_price": 98.66, "sell_ytm": 4.52, "sell_isin": "US911365BM59", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 63.79, "yield_diff": 45.48, "spread_compression": 4547.2, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 13, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CROWN", "sell_description": "CROWN 4.250% 09/2026", "sell_price": 99.7, "sell_ytm": 4.54, "sell_isin": "US22819KAB61", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.13, "yield_diff": 45.46, "spread_compression": 4536.4, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 14, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CROWN", "sell_description": "CROWN 4.250% 09/2026", "sell_price": 99.7, "sell_ytm": 4.54, "sell_isin": "US22819KAB61", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 57.8, "yield_diff": 45.46, "spread_compression": 4536.4, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 15, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "HOLOGIC", "sell_description": "HOLOGIC 3.250% 02/2029 [144A]", "sell_price": 95.86, "sell_ytm": 4.56, "sell_isin": "US436440AP62", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 63.19, "yield_diff": 45.44, "spread_compression": 4539.6, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 16, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "HOLOGIC", "sell_description": "HOLOGIC 3.250% 02/2029 [144A]", "sell_price": 95.86, "sell_ytm": 4.56, "sell_isin": "US436440AP62", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 60.99, "yield_diff": 45.44, "spread_compression": 4536.2, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 17, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SPIRIT", "sell_description": "SPIRIT 4.600% 06/2028", "sell_price": 100.07, "sell_ytm": 4.57, "sell_isin": "US85205TAK60", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 67.39999999999999, "yield_diff": 45.43, "spread_compression": 4542.8, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 18, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SPIRIT", "sell_description": "SPIRIT 4.600% 06/2028", "sell_price": 100.07, "sell_ytm": 4.57, "sell_isin": "US85205TAK60", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 65.19999999999999, "yield_diff": 45.43, "spread_compression": 4539.8, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 19, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CALPINE", "sell_description": "CALPINE 3.750% 03/2031 [144A]", "sell_price": 95.55, "sell_ytm": 4.68, "sell_isin": "US131347CR51", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 62.879999999999995, "yield_diff": 45.32, "spread_compression": 4513.8, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 20, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CALPINE", "sell_description": "CALPINE 3.750% 03/2031 [144A]", "sell_price": 95.55, "sell_ytm": 4.68, "sell_isin": "US131347CR51", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 60.68, "yield_diff": 45.32, "spread_compression": 4510.4, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}];
+    let filteredData = [...signalsData];
+    let currentSort = { column: 0, ascending: true };
+    
+    // Initialize table
+    function renderTable(data) {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+      
+      // Show first 20 signals for demo
+      const displayData = data.slice(0, 20);
+      
+      displayData.forEach(signal => {
+        const row = document.createElement('tr');
+        
+        const matchIndicator = (signal.duration_match ? '⏱ ' : '') + (signal.sector_match ? '🏢' : '');
+        
+        row.innerHTML = `
+          <td class="priority">${signal.priority}</td>
+          <td class="ticker">${signal.buy_ticker}</td>
+          <td class="description">${signal.buy_description}</td>
+          <td class="price">${signal.buy_price.toFixed(2)}</td>
+          <td class="ytm">${signal.buy_ytm.toFixed(2)}%</td>
+          <td class="ticker">${signal.sell_ticker}</td>
+          <td class="description">${signal.sell_description}</td>
+          <td class="price">${signal.sell_price.toFixed(2)}</td>
+          <td class="ytm">${signal.sell_ytm.toFixed(2)}%</td>
+          <td class="price positive">${signal.price_diff.toFixed(2)}</td>
+          <td class="ytm positive">${signal.yield_diff.toFixed(2)}%</td>
+          <td class="signal-${signal.signal_strength.toLowerCase()}">${signal.signal_strength}</td>
+          <td>
+            <div class="confidence-bar">
+              <div class="confidence-fill" style="width: ${signal.confidence}%"></div>
+            </div>
+          </td>
+          <td>${matchIndicator}</td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+      
+      document.getElementById('totalSignals').textContent = data.length;
+    }
+    
+    // Sorting function
+    function sortTable(columnIndex) {
+      const columns = ['priority', 'buy_ticker', 'buy_description', 'buy_price', 'buy_ytm',
+                     'sell_ticker', 'sell_description', 'sell_price', 'sell_ytm',
+                     'price_diff', 'yield_diff', 'signal_strength', 'confidence', 'sector_match'];
+      
+      const column = columns[columnIndex];
+      
+      if (currentSort.column === columnIndex) {
+        currentSort.ascending = !currentSort.ascending;
+      } else {
+        currentSort.column = columnIndex;
+        currentSort.ascending = true;
+      }
+      
+      filteredData.sort((a, b) => {
+        let aVal = a[column];
+        let bVal = b[column];
+        
+        if (typeof aVal === 'string') {
+          aVal = aVal.toLowerCase();
+          bVal = bVal.toLowerCase();
+        }
+        
+        if (currentSort.ascending) {
+          return aVal > bVal ? 1 : -1;
+        } else {
+          return aVal < bVal ? 1 : -1;
+        }
+      });
+      
+      renderTable(filteredData);
+    }
+    
+    // Filter functions
+    function applyFilters() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const signalFilter = document.getElementById('signalFilter').value;
+      const confidenceFilter = parseFloat(document.getElementById('confidenceFilter').value);
+      
+      filteredData = signalsData.filter(signal => {
+        // Search filter
+        if (searchTerm) {
+          const searchFields = [
+            signal.buy_ticker, signal.buy_description, signal.buy_isin,
+            signal.sell_ticker, signal.sell_description, signal.sell_isin
+          ].join(' ').toLowerCase();
+          
+          if (!searchFields.includes(searchTerm)) {
+            return false;
+          }
+        }
+        
+        // Signal strength filter
+        if (signalFilter && signal.signal_strength !== signalFilter) {
+          return false;
+        }
+        
+        // Confidence filter
+        if (signal.confidence < confidenceFilter) {
+          return false;
+        }
+        
+        return true;
+      });
+      
+      renderTable(filteredData);
+    }
+    
+    // Event listeners
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    document.getElementById('signalFilter').addEventListener('change', applyFilters);
+    document.getElementById('confidenceFilter').addEventListener('change', applyFilters);
+    
+    // Initial render
+    renderTable(signalsData);
+  </script>
 </body>
 </html>
