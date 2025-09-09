@@ -1,221 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Katana HYG Signals</title>
-  <style>
-    :root{
-      --bg:#0b1220;
-      --card:#111827;
-      --fg:#ffffff;
-      --muted:rgba(255,255,255,0.65);
-      --line:rgba(255,255,255,0.1);
-      --pos:#a6e3a1;
-      --neg:#f38ba8;
-      --accent:#00d4e4;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    }
-    h1{
-      text-align:center;
-      margin:1.4rem 0;
-      letter-spacing:.02em;
-    }
-    .table-card{
-      max-width:1400px;
-      margin:0 auto 2rem auto;
-      border:1px solid var(--line);
-      border-radius:12px;
-      background:var(--card);
-      overflow-x:auto;
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
-    }
-    table{
-      width:100%;
-      border-collapse:collapse;
-      font-size:.95rem;
-      min-width:900px;
-    }
-    thead th{
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-    th, td{
-      padding:.9rem .8rem;
-      border-bottom:1px solid var(--line);
-      text-align:center;
-    }
-    thead{
-      background:rgba(255,255,255,.05);
-    }
-    thead .group th{
-      background:rgba(255,255,255,.06);
-      font-size:.85rem;
-    }
-    .priority{
-      font-weight:800;
-      font-size:1.1rem;
-      white-space:nowrap;
-    }
-    .bond-cell{
-      text-align:left;
-      max-width:420px;
-    }
-    .bond-title{
-      font-weight:700;
-      font-size:1rem;
-    }
-    .bond-sub{
-      font-size:.82rem;
-      color:var(--muted);
-      margin-top:.15rem;
-    }
-    .price{
-      font-variant-numeric:tabular-nums;
-      white-space:nowrap;
-    }
-    .metric{
-      font-weight:700;
-      font-variant-numeric:tabular-nums;
-    }
-    .metric.positive{ color:var(--pos); }
-    .metric.negative{ color:var(--neg); }
-    .signal{
-      font-weight:800;
-      text-transform:uppercase;
-      display:inline-block;
-      padding:.25rem .6rem;
-      border-radius:6px;
-    }
-    .signal-strong{ background:linear-gradient(90deg,#a6e3a1,#94e2d5); color:#0b1220; }
-    .signal-medium{ background:rgba(249,226,175,.2); color:#f9e2af; }
-    .signal-weak{ background:rgba(255,255,255,.08); color:var(--muted); }
-    .confidence{ white-space:nowrap; }
-    .confidence-bar{
-      width:120px; height:8px; border-radius:4px;
-      background:rgba(255,255,255,.12); overflow:hidden;
-      margin:0 auto .25rem auto;
-    }
-    .confidence-fill{ height:100%; background:var(--accent); }
-    .confidence-text{ font-size:.82rem; color:var(--muted); }
-    .match-indicator{ font-size:1rem; }
-    /* Zebra striping for readability */
-    tbody tr:nth-child(even){ background:rgba(255,255,255,0.03); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katana HYG Bond Signals</title>
+    <style>
+        body {
+            background-color: #1a1b26;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+        }
+        .info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .averages {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .average-item {
+            background: #2a2b36;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .filters {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            text-align: left;
+            color: white;
+        }
+        th {
+            background-color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #2a2b36;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+        }
+        /* Cell Styles */
+        .description {
+            color: white;
+            font-size: 1.2rem;
+        }
+        .price {
+            font-weight: 600;
+            text-align: right;
+            color: white;
+        }
+        .confidence-bar {
+            width: 100px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #01a8b5 0%, #00d4e4 100%);
+            transition: width 0.3s ease;
+        }
+        .match-true {
+            color: white;
+            text-align: center;
+        }
+        .match-false {
+            color: white;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <h1>Katana HYG Signals</h1>
-  <div class="table-card">
-    <table id="signalsTable" aria-describedby="Signals for Buy/Sell bond pairs">
-      <thead>
-        <tr class="group">
-          <th rowspan="2">#</th>
-          <th colspan="2">Buy Side</th>
-          <th colspan="2">Sell Side</th>
-          <th rowspan="2">Price Diff</th>
-          <th rowspan="2">Signal</th>
-          <th rowspan="2">Confidence</th>
-          <th rowspan="2">Matches</th>
-        </tr>
-        <tr>
-          <th>Buy Bond</th>
-          <th>Price</th>
-          <th>Sell Bond</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
+    <h1>Katana HYG Bond Signals</h1>
+    
+    <div class="info">
+        <p>Generated: 2025-09-08 18:02:31 UTC</p>
+        <p>Total Signals: 50</p>
+        <p>Data Source: BlackRock HYG ETF Holdings</p>
+    </div>
+    
+    <div class="averages">
+        <div class="average-item">
+            <p>Avg Price Differential</p>
+            <p>$60.65</p>
+        </div>
+        <div class="average-item">
+            <p>Avg Yield Differential</p>
+            <p>45.51%</p>
+        </div>
+        <div class="average-item">
+            <p>Avg Spread Compression</p>
+            <p>4543 bps</p>
+        </div>
+        <div class="average-item">
+            <p>Avg Confidence</p>
+            <p>100.0%</p>
+        </div>
+    </div>
+    
+    <div class="filters">
+        <div>
+            <p>Signal Strength:</p>
+            <select>
+                <option>All</option>
+                <option>Strong</option>
+                <option>Medium</option>
+                <option>Weak</option>
+            </select>
+        </div>
+        <div>
+            <p>Min Confidence:</p>
+            <select>
+                <option>All</option>
+                <option>50%+</option>
+                <option>75%+</option>
+                <option>90%+</option>
+            </select>
+        </div>
+    </div>
+    
+    <table id="signalsTable">
+        <thead>
+            <tr>
+                <th>Priority</th>
+                <th>Buy Bond</th>
+                <th>Price</th>
+                <th>Sell Bond</th>
+                <th>Price</th>
+                <th>Price Diff</th>
+                <th>Signal Confidence</th>
+                <th>Matches</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
     </table>
-  </div>
+    
+    <footer>
+        <p>© 2025 Katana Signal Engine | Powered by KatanaSignalEngine</p>
+        <p>High-yield bond trading signals generated using neural network analysis</p>
+    </footer>
 
-  <script>
-    // Example data (NO rating columns, NO YTM columns)
-    const signals = [
-      {
-        priority: 1,
-        buy_description: "ARDAGH 5.250% 08/2027 [144A]",
-        buy_price: 41.57,
-        sell_description: "CLARIOS 8.500% 05/2027 [144A]",
-        sell_price: 100.17,
-        price_diff: 58.60,
-        signal_strength: "STRONG",
-        confidence: 100,
-        matchIndicator: "⏱ 🏢"
-      },
-      {
-        priority: 2,
-        buy_description: "ARDAGH 5.250% 08/2027 [144A]",
-        buy_price: 41.90,
-        sell_description: "CLARIOS 8.500% 05/2027 [144A]",
-        sell_price: 100.17,
-        price_diff: 58.27,
-        signal_strength: "STRONG",
-        confidence: 100,
-        matchIndicator: "⏱ 🏢"
-      },
-      {
-        priority: 3,
-        buy_description: "ARDAGH 5.250% 08/2027 [144A]",
-        buy_price: 41.57,
-        sell_description: "AG 8.630% 09/2027 [144A]",
-        sell_price: 102.52,
-        price_diff: 60.95,
-        signal_strength: "STRONG",
-        confidence: 100,
-        matchIndicator: "⏱ 🏢"
-      }
-    ];
+    <script>
+        // Signal data
+        const signalsData = [
+            {"priority": 1, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CLARIOS", "sell_description": "CLARIOS 8.500% 05/2027 [144A]", "sell_price": 100.17, "sell_ytm": 2.25, "sell_isin": "US69867DAC20", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.6, "yield_diff": 47.75, "spread_compression": 4757.9, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}
+            // Add more signal data as needed
+        ];
 
-    function safeNum(n, d=0){ const x = Number(n); return Number.isFinite(x) ? x : d; }
-
-    function renderTable(rows){
-      const tbody = document.getElementById('tableBody');
-      tbody.innerHTML = '';
-      rows.forEach(signal => {
-        const row = document.createElement('tr');
-        const priceDiff = safeNum(signal.price_diff);
-        row.innerHTML = `
-          <td class="priority">${signal.priority ?? ""}</td>
-
-          <!-- Buy Side -->
-          <td class="bond-cell">
-            <div class="bond-title">${signal.buy_description ?? ""}</div>
-          </td>
-          <td class="price">$${safeNum(signal.buy_price).toFixed(2)}</td>
-
-          <!-- Sell Side -->
-          <td class="bond-cell">
-            <div class="bond-title">${signal.sell_description ?? ""}</div>
-          </td>
-          <td class="price">$${safeNum(signal.sell_price).toFixed(2)}</td>
-
-          <!-- Metrics -->
-          <td class="metric ${priceDiff >= 0 ? 'positive' : 'negative'}">
-            ${priceDiff.toFixed(2)}
-          </td>
-          <td class="signal signal-${String(signal.signal_strength || '').toLowerCase()}">
-            ${signal.signal_strength ?? ""}
-          </td>
-          <td class="confidence">
-            <div class="confidence-bar" aria-label="Confidence">
-              <div class="confidence-fill" style="width: ${safeNum(signal.confidence).toFixed(0)}%"></div>
-            </div>
-            <span class="confidence-text">${safeNum(signal.confidence).toFixed(0)}%</span>
-          </td>
-          <td class="match-indicator">${signal.matchIndicator ?? ""}</td>
-        `;
-        tbody.appendChild(row);
-      });
-    }
-
-    renderTable(signals);
-  </script>
+        // Populate table
+        const tbody = document.querySelector('#signalsTable tbody');
+        signalsData.forEach(signal => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${signal.priority}</td>
+                <td class="description">${signal.buy_description}</td>
+                <td class="price">${signal.buy_price}</td>
+                <td class="description">${signal.sell_description}</td>
+                <td class="price">${signal.sell_price}</td>
+                <td class="price">${signal.price_diff}</td>
+                <td>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: ${signal.confidence}%;"></div>
+                    </div>
+                </td>
+                <td class="match-true">${signal.duration_match ? '✓' : '✗'}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    </script>
 </body>
 </html>
