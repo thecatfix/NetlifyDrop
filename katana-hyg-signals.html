@@ -1,3 +1,126 @@
+<style>
+  #signalsTable {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff; /* all text white */
+    font-family: Arial, sans-serif;
+  }
+
+  #signalsTable th, #signalsTable td {
+    padding: 0.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  #signalsTable thead th {
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .priority {
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .bond-details {
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
+  .bond-subtext {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .rating {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .spread {
+    text-align: right;
+    font-weight: 700;
+    color: #a6e3a1;
+  }
+
+  .signal-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #a6e3a1, #94e2d5);
+    color: #1a1f2e;
+  }
+
+  .score-box {
+    display: inline-block;
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+  }
+
+  .score-value {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #ffffff;
+  }
+
+  .score-percent {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+  }
+</style>
+
+<table id="signalsTable">
+  <thead>
+    <tr class="header-main">
+      <th rowspan="2" style="width:60px;">#</th>
+      <th colspan="2">BUY SIDE</th>
+      <th colspan="2">SELL SIDE</th>
+      <th colspan="3">METRICS</th>
+    </tr>
+    <tr class="header-sub">
+      <th>Bond Details</th>
+      <th>Rating</th>
+      <th>Bond Details</th>
+      <th>Rating</th>
+      <th>Spread</th>
+      <th>Signal</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="priority">1</td>
+      <td>
+        <div class="bond-details">
+          ARDAGH 5.250% 08/27<br>
+          <span class="bond-subtext">ISIN: US03969AAR14 | Price: $41.57</span>
+        </div>
+      </td>
+      <td class="rating">NR</td>
+      <td>
+        <div class="bond-details">
+          CLARIOS 8.500% 05/27<br>
+          <span class="bond-subtext">ISIN: US69867DAC20 | Price: $100.17</span>
+        </div>
+      </td>
+      <td class="rating">NR</td>
+      <td class="spread">4758 <span class="bond-subtext">bps</span></td>
+      <td><span class="signal-badge">STRONG</span></td>
+      <td>
+        <div class="score-box">
+          <span class="score-value">100</span>
+          <span class="score-percent">%</span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
