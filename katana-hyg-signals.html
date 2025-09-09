@@ -7,142 +7,426 @@
 
   <style>
     :root {
-      --bg: #0b1220;
-      --card: #111827;
-      --muted: rgba(255,255,255,0.6);
-      --muted2: rgba(255,255,255,0.08);
-      --border: rgba(255,255,255,0.1);
-      --positive: #a6e3a1;
-      --negative: #f38ba8;
-      --accent: #00d4e4;
+      /* Katana Design System Colors */
+      --katana-primary: #01A8B5;
+      --katana-positive: #43DEAF;
+      --katana-negative: #DE4383;
+      --katana-signal: #F3AE4B;
+      
+      /* Background Hierarchy */
+      --katana-bg: #232B42;
+      --katana-bg-light: #373d4f;
+      --katana-bg-dark: #161a2a;
+      --katana-bg-subtle: #2C3654;
+      
+      /* Text & Overlay System */
+      --katana-white: #fff;
+      --katana-white-5: #293046;
+      --katana-white-10: #32394E;
+      --katana-white-20: #575b6c;
+      --katana-white-50: rgba(255, 255, 255, 0.5);
+      --katana-white-75: #C5C9D3;
+      
+      /* Table specific */
+      --katana-border: var(--katana-white-20);
+      --katana-hover: var(--katana-white-10);
+      --katana-card: var(--katana-bg-light);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: var(--bg);
-      color: #fff;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--katana-bg);
+      color: var(--katana-white);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
     }
     h1 {
       text-align: center;
-      margin: 1.25rem 0 1rem;
-      letter-spacing: 0.02em;
+      margin: 2rem 0 1.5rem;
+      font-size: 2.25rem;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      color: var(--katana-white);
     }
+    
+    /* Katana responsive breakpoints */
+    @media (min-width: 800px) {
+      h1 { font-size: 2.5rem; }
+    }
+    @media (min-width: 1200px) {
+      h1 { font-size: 2.75rem; }
+    }
+    
     .table-card {
       max-width: 1400px;
       margin: 0 auto 2rem;
-      border: 1px solid var(--border);
+      border: 1px solid var(--katana-border);
       border-radius: 12px;
-      background: var(--card);
+      background: var(--katana-card);
       overflow-x: auto;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      transition: box-shadow 0.3s ease;
+    }
+    
+    .table-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.95rem;
-      table-layout: auto;
+      font-size: 1.3rem;
+      table-layout: fixed;
     }
+    
+    /* Katana responsive typography */
+    @media (min-width: 1200px) {
+      table {
+        font-size: 1.4rem;
+      }
+    }
+    
     thead th {
       position: sticky;
       top: 0;
       z-index: 1;
-      background: #0f172a;
-      border-bottom: 1px solid var(--border);
+      background: var(--katana-bg-dark);
+      border-bottom: 2px solid var(--katana-border);
       text-transform: uppercase;
-      font-weight: 800;
-      letter-spacing: 0.06em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--katana-white-75);
+      font-size: 0.875rem;
     }
+    
     th, td {
-      padding: 0.9rem 0.8rem;
-      border-bottom: 1px solid var(--border);
+      padding: 1rem 0.75rem;
+      border-bottom: 1px solid var(--katana-border);
       text-align: center;
       vertical-align: middle;
     }
+    
+    /* Katana alternating row pattern */
+    tbody tr:nth-child(odd) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    
+    tbody tr:nth-child(even) {
+      background: var(--katana-white-5);
+    }
+    
     tbody tr:hover {
-      background: rgba(255,255,255,0.03);
+      background: var(--katana-hover) !important;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
     }
     .priority {
-      font-weight: 800;
-      font-size: 1.05rem;
+      font-weight: 600;
+      font-size: 1.1rem;
       white-space: nowrap;
+      color: var(--katana-primary);
     }
+    
     .description {
       text-align: left;
-      min-width: 320px;
+      min-width: 280px;
     }
+    
+    @media (min-width: 800px) {
+      .description {
+        min-width: 320px;
+      }
+    }
+    
+    @media (min-width: 1200px) {
+      .description {
+        min-width: 380px;
+      }
+    }
+    
     .bond-title {
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1rem;
-      line-height: 1.2;
+      line-height: 1.3;
+      color: var(--katana-white);
+      margin-bottom: 0.25rem;
     }
+    
     .bond-sub {
-      margin-top: 0.25rem;
-      font-size: 0.85rem;
-      color: var(--muted);
+      font-size: 0.875rem;
+      color: var(--katana-white-50);
+      font-weight: 400;
     }
+    
     .metric {
-      font-weight: 700;
+      font-weight: 600;
       white-space: nowrap;
+      font-size: 1rem;
     }
-    .positive { color: var(--positive); }
-    .negative { color: var(--negative); }
+    
+    .positive { 
+      color: var(--katana-positive); 
+      font-weight: 600;
+    }
+    
+    .negative { 
+      color: var(--katana-negative);
+      font-weight: 600;
+    }
     .signal {
-      font-weight: 800;
+      font-weight: 600;
       text-transform: uppercase;
       white-space: nowrap;
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
     }
+    
     .signal-strong {
-      background: linear-gradient(90deg, #a6e3a1, #94e2d5);
-      color: #0b1220;
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
+      background: linear-gradient(135deg, var(--katana-positive), rgba(67, 222, 175, 0.8));
+      color: var(--katana-bg-dark);
+      padding: 0.375rem 0.75rem;
+      border-radius: 8px;
       display: inline-block;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(67, 222, 175, 0.3);
     }
+    
+    .signal-moderate {
+      background: rgba(243, 174, 75, 0.2);
+      color: var(--katana-signal);
+      padding: 0.375rem 0.75rem;
+      border-radius: 8px;
+      display: inline-block;
+      border: 1px solid rgba(243, 174, 75, 0.4);
+    }
+    
     .signal-medium {
-      background: rgba(249, 226, 175, 0.2);
-      color: #f9e2af;
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
+      background: rgba(243, 174, 75, 0.2);
+      color: var(--katana-signal);
+      padding: 0.375rem 0.75rem;
+      border-radius: 8px;
       display: inline-block;
+      border: 1px solid rgba(243, 174, 75, 0.4);
     }
+    
     .signal-weak {
-      background: var(--muted2);
-      color: rgba(255,255,255,0.7);
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
+      background: var(--katana-white-5);
+      color: var(--katana-white-50);
+      padding: 0.375rem 0.75rem;
+      border-radius: 8px;
       display: inline-block;
+      border: 1px solid var(--katana-white-20);
     }
     .confidence {
       text-align: center;
       white-space: nowrap;
+      min-width: 100px;
     }
+    
     .confidence-bar {
-      background: var(--muted2);
-      height: 8px;
-      border-radius: 4px;
+      background: var(--katana-white-5);
+      height: 10px;
+      border-radius: 6px;
       overflow: hidden;
-      margin: 0 auto 0.25rem auto;
-      width: 120px;
+      margin: 0 auto 0.5rem auto;
+      width: 100px;
+      border: 1px solid var(--katana-white-10);
     }
+    
+    @media (min-width: 1200px) {
+      .confidence-bar {
+        width: 120px;
+      }
+    }
+    
     .confidence-fill {
-      background: var(--accent);
+      background: linear-gradient(90deg, var(--katana-primary), rgba(1, 168, 181, 0.8));
       height: 100%;
+      transition: width 0.3s ease;
+      border-radius: 4px;
     }
+    
     .confidence-text {
-      font-size: 0.85rem;
-      color: var(--muted);
+      font-size: 0.875rem;
+      color: var(--katana-white-75);
+      font-weight: 600;
     }
-    .match-indicator { font-size: 1.1rem; }
+    .match-indicator { 
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    
     .footer {
       max-width: 1400px;
-      margin: -1rem auto 2rem;
-      color: var(--muted);
-      font-size: 0.9rem;
-      padding: 0 0.5rem;
+      margin: 0 auto 2rem;
+      color: var(--katana-white-50);
+      font-size: 0.875rem;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid var(--katana-border);
+      background: var(--katana-bg-dark);
+      border-radius: 0 0 12px 12px;
     }
-    @media (max-width: 720px) {
-      .description { min-width: 260px; }
+    
+    /* Interactive States and Selection */
+    tbody tr.selected {
+      background: rgba(1, 168, 181, 0.15) !important;
+      border-left: 3px solid var(--katana-primary);
+    }
+    
+    tbody tr:focus {
+      outline: 2px solid var(--katana-primary);
+      outline-offset: 2px;
+    }
+    
+    /* Tooltip Styles */
+    .signal-tooltip {
+      position: fixed;
+      background: var(--katana-card);
+      border: 1px solid var(--katana-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      min-width: 300px;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      animation: tooltipFadeIn 0.2s ease-out;
+    }
+    
+    @keyframes tooltipFadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .tooltip-header {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--katana-primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--katana-border);
+    }
+    
+    .tooltip-content {
+      display: grid;
+      gap: 1rem;
+    }
+    
+    .tooltip-section {
+      padding: 0.75rem 0;
+    }
+    
+    .tooltip-section strong {
+      color: var(--katana-white-75);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+    
+    .tooltip-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--katana-border);
+    }
+    
+    .tooltip-metrics div {
+      font-size: 0.875rem;
+      color: var(--katana-white-75);
+      padding: 0.25rem 0;
+    }
+    
+    .tooltip-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 1rem;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--katana-white-50);
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+    
+    .tooltip-close:hover {
+      background: var(--katana-negative);
+      color: var(--katana-white);
+    }
+
+    /* Enhanced mobile responsiveness */
+    @media (max-width: 480px) {
+      .table-card {
+        margin: 0 0.5rem 2rem;
+        border-radius: 8px;
+      }
+      
+      h1 {
+        font-size: 1.75rem;
+        margin: 1rem 0 1rem;
+      }
+      
+      table {
+        font-size: 0.875rem;
+      }
+      
+      th, td {
+        padding: 0.75rem 0.5rem;
+      }
+      
+      .description {
+        min-width: 220px;
+      }
+      
+      .bond-title {
+        font-size: 0.875rem;
+      }
+      
+      .bond-sub {
+        font-size: 0.75rem;
+      }
+      
+      .confidence-bar {
+        width: 80px;
+        height: 8px;
+      }
+      
+      .footer {
+        padding: 0.75rem 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .signal-tooltip {
+        min-width: 280px;
+        max-width: calc(100vw - 2rem);
+        left: 1rem !important;
+        right: 1rem;
+        padding: 1rem;
+      }
+      
+      .tooltip-metrics {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 720px) and (min-width: 481px) {
+      .description { 
+        min-width: 260px; 
+      }
+      
+      table {
+        font-size: 1rem;
+      }
+      
+      .signal-tooltip {
+        min-width: 320px;
+        max-width: calc(100vw - 4rem);
+      }
     }
   </style>
 </head>
@@ -169,9 +453,105 @@
   <div id="tableDesc" class="footer">Description = bond label. No ratings or per-side YTM columns are shown; only aggregate metrics are displayed.</div>
 
   <script>
-    // ---- Data selection ----
-    // Use a provided dataset if available. Accept either window.signalsData or a top-level signalsData.
-    const sampleSignals = [
+    // ---- Data Transformation Framework ----
+    
+    // Custom Error Classes
+    class ValidationError extends Error {
+      constructor(message, field = 'unknown', value = null) {
+        super(message)
+        this.name = 'ValidationError'
+        this.field = field
+        this.value = value
+      }
+    }
+
+    class DataTransformationError extends Error {
+      constructor(message, sourceData, fieldErrors = []) {
+        super(message)
+        this.name = 'DataTransformationError'
+        this.sourceData = sourceData
+        this.fieldErrors = fieldErrors
+      }
+    }
+
+    // Field Transformation Functions
+    const mapIndex = (priority) => {
+      if (!Number.isInteger(priority) || priority < 1) {
+        throw new ValidationError('Priority must be a positive integer', 'priority', priority)
+      }
+      return priority.toString()
+    }
+
+    const mapBondDescription = (description, type) => {
+      if (typeof description !== 'string' || description.trim().length === 0) {
+        throw new ValidationError(`${type} bond description cannot be empty`, `${type}_description`, description)
+      }
+      return description.trim()
+    }
+
+    const mapPrice = (price, type) => {
+      if (typeof price !== 'number' || !isFinite(price) || price < 0) {
+        throw new ValidationError(`${type} price must be a valid positive number`, `${type}_price`, price)
+      }
+      return price.toFixed(2)
+    }
+
+    const mapPriceDiff = (priceDiff) => {
+      if (typeof priceDiff !== 'number' || !isFinite(priceDiff)) {
+        throw new ValidationError('Price difference must be a valid number', 'price_diff', priceDiff)
+      }
+      return {
+        value: Math.abs(priceDiff).toFixed(2),
+        cssClass: priceDiff >= 0 ? 'positive' : 'negative'
+      }
+    }
+
+    const mapYieldDiff = (yieldDiff) => {
+      if (typeof yieldDiff !== 'number' || !isFinite(yieldDiff)) {
+        throw new ValidationError('Yield difference must be a valid number', 'yield_diff', yieldDiff)
+      }
+      return {
+        value: `${Math.abs(yieldDiff).toFixed(2)}%`,
+        cssClass: yieldDiff >= 0 ? 'positive' : 'negative'
+      }
+    }
+
+    const mapSignalStrength = (signal) => {
+      const validSignals = ['WEAK', 'MODERATE', 'STRONG']
+      if (typeof signal !== 'string' || !validSignals.includes(signal.toUpperCase())) {
+        throw new ValidationError(`Signal strength must be one of: ${validSignals.join(', ')}`, 'signal_strength', signal)
+      }
+      const normalizedSignal = signal.toUpperCase()
+      return {
+        value: normalizedSignal,
+        cssClass: `signal-${normalizedSignal.toLowerCase()}`
+      }
+    }
+
+    const mapConfidence = (confidence) => {
+      if (typeof confidence !== 'number' || !isFinite(confidence)) {
+        throw new ValidationError('Confidence must be a valid number', 'confidence', confidence)
+      }
+      const clampedConfidence = Math.max(0, Math.min(100, confidence))
+      return {
+        percentage: clampedConfidence,
+        display: `${Math.round(clampedConfidence)}%`
+      }
+    }
+
+    const mapMatches = (durationMatch, sectorMatch) => {
+      const matches = []
+      if (typeof durationMatch === 'boolean' && durationMatch) {
+        matches.push('⏱')
+      }
+      if (typeof sectorMatch === 'boolean' && sectorMatch) {
+        matches.push('🏢')
+      }
+      return matches.join(' ')
+    }
+
+    // Sample Data
+    const getSampleData = () => [
       {
         priority: 1,
         buy_description: "ARDAGH 5.250% 08/2027 [144A]",
@@ -184,79 +564,374 @@
         confidence: 100,
         duration_match: true,
         sector_match: true
+      },
+      {
+        priority: 2,
+        buy_description: "TESLA INC 1.250% 03/2033",
+        buy_price: 78.92,
+        sell_description: "FORD MOTOR 4.750% 01/2043",
+        sell_price: 95.44,
+        price_diff: 16.52,
+        yield_diff: -12.33,
+        signal_strength: "MODERATE",
+        confidence: 75,
+        duration_match: false,
+        sector_match: true
+      },
+      {
+        priority: 3,
+        buy_description: "APPLE INC 2.875% 02/2025",
+        buy_price: 98.45,
+        sell_description: "MICROSOFT 3.125% 11/2028",
+        sell_price: 102.33,
+        price_diff: 3.88,
+        yield_diff: 8.25,
+        signal_strength: "WEAK",
+        confidence: 45,
+        duration_match: true,
+        sector_match: false
+      },
+      {
+        priority: 4,
+        buy_description: "JPM CHASE 3.200% 06/2026",
+        buy_price: 95.22,
+        sell_description: "GOLDMAN SACHS 3.750% 05/2028",
+        sell_price: 97.85,
+        price_diff: 2.63,
+        yield_diff: 15.40,
+        signal_strength: "MODERATE",
+        confidence: 68,
+        duration_match: true,
+        sector_match: true
+      },
+      {
+        priority: 5,
+        buy_description: "EXXON MOBIL 4.125% 03/2027",
+        buy_price: 103.67,
+        sell_description: "CHEVRON 2.954% 05/2026",
+        sell_price: 99.12,
+        price_diff: -4.55,
+        yield_diff: -22.18,
+        signal_strength: "STRONG",
+        confidence: 92,
+        duration_match: false,
+        sector_match: true
+      },
+      {
+        priority: 6,
+        buy_description: "AMAZON 2.500% 11/2050",
+        buy_price: 65.78,
+        sell_description: "NETFLIX 4.875% 04/2028",
+        sell_price: 108.45,
+        price_diff: 42.67,
+        yield_diff: 35.92,
+        signal_strength: "STRONG",
+        confidence: 88,
+        duration_match: false,
+        sector_match: false
+      },
+      {
+        priority: 7,
+        buy_description: "WALMART 3.625% 12/2028",
+        buy_price: 101.23,
+        sell_description: "TARGET 2.500% 04/2026",
+        sell_price: 97.44,
+        price_diff: -3.79,
+        yield_diff: -18.67,
+        signal_strength: "MODERATE",
+        confidence: 72,
+        duration_match: true,
+        sector_match: true
+      },
+      {
+        priority: 8,
+        buy_description: "BOEING 5.930% 05/2060",
+        buy_price: 89.34,
+        sell_description: "AIRBUS 1.875% 04/2024",
+        sell_price: 99.87,
+        price_diff: 10.53,
+        yield_diff: 28.45,
+        signal_strength: "WEAK",
+        confidence: 38,
+        duration_match: false,
+        sector_match: true
       }
-    ];
+    ]
 
-    const signals =
-      (typeof window !== 'undefined' && Array.isArray(window.signalsData) && window.signalsData.length) ? window.signalsData :
-      (typeof signalsData !== 'undefined' && Array.isArray(signalsData) && signalsData.length) ? signalsData :
-      sampleSignals;
-
-    // ---- Helpers ----
-    function fmt(n, d=2) {
-      const x = Number(n);
-      return Number.isFinite(x) ? x.toFixed(d) : "--";
+    // Data Source Management
+    const getSignalsData = async () => {
+      // Try to load from KatanaSignalEngine JSON data first
+      try {
+        const response = await fetch('./katana_signals_data.json')
+        if (response.ok) {
+          const katanaData = await response.json()
+          if (Array.isArray(katanaData) && katanaData.length > 0) {
+            console.log(`Loaded ${katanaData.length} signals from KatanaSignalEngine`)
+            return katanaData
+          }
+        }
+      } catch (error) {
+        console.warn('Failed to load KatanaSignalEngine data:', error.message)
+      }
+      
+      // Fallback to window/global data sources
+      if (typeof window !== 'undefined' && window.signalsData && Array.isArray(window.signalsData)) {
+        console.log('Using window.signalsData')
+        return window.signalsData
+      }
+      if (typeof signalsData !== 'undefined' && Array.isArray(signalsData)) {
+        console.log('Using global signalsData')
+        return signalsData
+      }
+      
+      console.log('Using sample data (fallback)')
+      return getSampleData()
     }
 
-    // ---- Render ----
-    function renderTable(rows){
-      const tbody = document.getElementById('tableBody');
-      tbody.innerHTML = '';
-
-      rows
-        .slice()
-        .sort((a,b) => Number(a.priority) - Number(b.priority))
-        .forEach(signal => {
-          const row = document.createElement('tr');
-
-          const durationOk = !!signal.duration_match;
-          const sectorOk = !!signal.sector_match;
-          const matchIndicator = (durationOk ? "⏱" : "—") + (sectorOk ? " 🏢" : "");
-
-          const priceDiff = Number(signal.price_diff);
-          const yieldDiff = Number(signal.yield_diff);
-          const conf = Number(signal.confidence);
-
-          row.innerHTML = `
-            <td class="priority">${signal.priority}</td>
-
-            <!-- Buy Side -->
-            <td class="description">
-              <div class="bond-title">${signal.buy_description || ""}</div>
-              <div class="bond-sub">Price: $${fmt(signal.buy_price)}</div>
-            </td>
-
-            <!-- Sell Side -->
-            <td class="description">
-              <div class="bond-title">${signal.sell_description || ""}</div>
-              <div class="bond-sub">Price: $${fmt(signal.sell_price)}</div>
-            </td>
-
-            <!-- Metrics -->
-            <td class="metric ${priceDiff >= 0 ? 'positive' : 'negative'}">
-              ${fmt(priceDiff)}
-            </td>
-            <td class="metric ${yieldDiff >= 0 ? 'positive' : 'negative'}">
-              ${fmt(yieldDiff)}%
-            </td>
-            <td class="signal">
-              <span class="signal-${String(signal.signal_strength || '').toLowerCase()}">
-                ${signal.signal_strength || ""}
-              </span>
-            </td>
-            <td class="confidence">
-              <div class="confidence-bar" aria-label="Confidence">
-                <div class="confidence-fill" style="width: ${Math.max(0, Math.min(100, conf))}%"></div>
-              </div>
-              <span class="confidence-text">${Number.isFinite(conf) ? conf.toFixed(0) : "--"}%</span>
-            </td>
-            <td class="match-indicator">${matchIndicator}</td>
-          `;
-          tbody.appendChild(row);
-        });
+    // Core Data Transformation
+    const transformSignalData = (sourceData) => {
+      try {
+        return {
+          index: mapIndex(sourceData.priority),
+          buyBond: mapBondDescription(sourceData.buy_description, 'buy'),
+          buyPrice: mapPrice(sourceData.buy_price, 'buy'),
+          sellBond: mapBondDescription(sourceData.sell_description, 'sell'),
+          sellPrice: mapPrice(sourceData.sell_price, 'sell'),
+          priceDiff: mapPriceDiff(sourceData.price_diff),
+          yieldDiff: mapYieldDiff(sourceData.yield_diff),
+          signal: mapSignalStrength(sourceData.signal_strength),
+          confidence: mapConfidence(sourceData.confidence),
+          matches: mapMatches(sourceData.duration_match, sourceData.sector_match)
+        }
+      } catch (error) {
+        if (error instanceof ValidationError) {
+          throw new DataTransformationError(
+            `Failed to transform signal data: ${error.message}`,
+            sourceData,
+            [error]
+          )
+        }
+        throw error
+      }
     }
 
-    renderTable(signals);
+    // Batch Transformation with Error Handling
+    const transformSignalDataBatch = (sourceDataArray) => {
+      const success = []
+      const errors = []
+      
+      sourceDataArray.forEach((sourceData, index) => {
+        try {
+          const transformed = transformSignalData(sourceData)
+          success.push(transformed)
+        } catch (error) {
+          console.error(`Failed to transform record ${index}:`, error)
+          if (error instanceof DataTransformationError) {
+            errors.push({ index, error })
+          } else {
+            errors.push({ 
+              index, 
+              error: new DataTransformationError(`Unexpected error: ${error.message}`, sourceData)
+            })
+          }
+        }
+      })
+      
+      return { success, errors }
+    }
+
+    // Enhanced Rendering with Katana Design and Interactive States
+    const renderSignalsTable = (transformedData) => {
+      const tbody = document.getElementById('tableBody')
+      tbody.innerHTML = ''
+
+      // Sort by priority
+      const sortedData = transformedData.sort((a, b) => parseInt(a.index) - parseInt(b.index))
+
+      sortedData.forEach((signal, index) => {
+        const row = document.createElement('tr')
+        row.setAttribute('data-priority', signal.index)
+        row.setAttribute('role', 'row')
+        row.setAttribute('tabindex', '0')
+        row.setAttribute('aria-label', `Signal ${signal.index}: ${signal.buyBond} vs ${signal.sellBond}`)
+        
+        // Add interactive behaviors matching Ideas page patterns
+        row.addEventListener('click', () => handleRowClick(signal))
+        row.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            handleRowClick(signal)
+          }
+        })
+
+        // Add focus management for keyboard navigation
+        row.addEventListener('focus', () => {
+          row.style.outline = `2px solid var(--katana-primary)`
+          row.style.outlineOffset = '2px'
+        })
+        
+        row.addEventListener('blur', () => {
+          row.style.outline = 'none'
+        })
+
+        row.innerHTML = `
+          <td class="priority">${signal.index}</td>
+          <td class="description">
+            <div class="bond-title">${signal.buyBond}</div>
+            <div class="bond-sub">Price: $${signal.buyPrice}</div>
+          </td>
+          <td class="description">
+            <div class="bond-title">${signal.sellBond}</div>
+            <div class="bond-sub">Price: $${signal.sellPrice}</div>
+          </td>
+          <td class="metric ${signal.priceDiff.cssClass}">
+            ${signal.priceDiff.value}
+          </td>
+          <td class="metric ${signal.yieldDiff.cssClass}">
+            ${signal.yieldDiff.value}
+          </td>
+          <td class="signal">
+            <span class="${signal.signal.cssClass}">
+              ${signal.signal.value}
+            </span>
+          </td>
+          <td class="confidence">
+            <div class="confidence-bar" aria-label="Confidence: ${signal.confidence.display}">
+              <div class="confidence-fill" style="width: ${signal.confidence.percentage}%"></div>
+            </div>
+            <span class="confidence-text">${signal.confidence.display}</span>
+          </td>
+          <td class="match-indicator">${signal.matches}</td>
+        `
+        
+        tbody.appendChild(row)
+      })
+    }
+
+    // Row Click Handler (matching Ideas page interaction patterns)
+    const handleRowClick = (signal) => {
+      console.log(`Signal ${signal.index} selected:`, {
+        buyBond: signal.buyBond,
+        sellBond: signal.sellBond,
+        priceDiff: signal.priceDiff.value,
+        confidence: signal.confidence.percentage
+      })
+      
+      // Add visual feedback for selection
+      const allRows = document.querySelectorAll('tbody tr')
+      allRows.forEach(row => row.classList.remove('selected'))
+      
+      const clickedRow = document.querySelector(`tr[data-priority="${signal.index}"]`)
+      if (clickedRow) {
+        clickedRow.classList.add('selected')
+      }
+      
+      // Placeholder for navigation - in real implementation, this would
+      // navigate to signal detail page or open modal
+      showSignalTooltip(signal)
+    }
+
+    // Signal Tooltip (enhanced UX similar to Ideas page)
+    const showSignalTooltip = (signal) => {
+      // Remove existing tooltip
+      const existingTooltip = document.querySelector('.signal-tooltip')
+      if (existingTooltip) {
+        existingTooltip.remove()
+      }
+
+      const tooltip = document.createElement('div')
+      tooltip.className = 'signal-tooltip'
+      tooltip.innerHTML = `
+        <div class="tooltip-header">Signal ${signal.index} Details</div>
+        <div class="tooltip-content">
+          <div class="tooltip-section">
+            <strong>Buy Side:</strong><br>
+            ${signal.buyBond}<br>
+            Price: $${signal.buyPrice}
+          </div>
+          <div class="tooltip-section">
+            <strong>Sell Side:</strong><br>
+            ${signal.sellBond}<br>
+            Price: $${signal.sellPrice}
+          </div>
+          <div class="tooltip-metrics">
+            <div>Price Diff: ${signal.priceDiff.value}</div>
+            <div>Yield Diff: ${signal.yieldDiff.value}</div>
+            <div>Confidence: ${signal.confidence.display}</div>
+            <div>Signal Strength: ${signal.signal.value}</div>
+          </div>
+        </div>
+        <div class="tooltip-close">×</div>
+      `
+
+      document.body.appendChild(tooltip)
+
+      // Position tooltip
+      const rect = document.querySelector(`tr[data-priority="${signal.index}"]`).getBoundingClientRect()
+      tooltip.style.position = 'fixed'
+      tooltip.style.top = `${rect.top + window.scrollY - 10}px`
+      tooltip.style.left = `${Math.min(rect.right + 20, window.innerWidth - 320)}px`
+      tooltip.style.zIndex = '1000'
+
+      // Close tooltip events
+      tooltip.querySelector('.tooltip-close').addEventListener('click', () => {
+        tooltip.remove()
+      })
+
+      document.addEventListener('click', (e) => {
+        if (!tooltip.contains(e.target) && !e.target.closest('tr')) {
+          tooltip.remove()
+        }
+      })
+
+      // Auto-close after 10 seconds
+      setTimeout(() => {
+        if (tooltip.parentNode) {
+          tooltip.remove()
+        }
+      }, 10000)
+    }
+
+    // Initialize Table
+    const initializeTable = async () => {
+      try {
+        // Show loading state
+        document.getElementById('tableBody').innerHTML = 
+          '<tr><td colspan="8" style="text-align: center; color: var(--katana-primary); padding: 2rem;">Loading Katana Signal Engine data...</td></tr>'
+        
+        const sourceData = await getSignalsData()
+        const { success: transformedData, errors } = transformSignalDataBatch(sourceData)
+        
+        if (errors.length > 0) {
+          console.group(`Data Transformation Errors (${errors.length})`)
+          errors.forEach(({ index, error }) => {
+            console.error(`Record ${index}:`, error.message, error.sourceData)
+          })
+          console.groupEnd()
+        }
+        
+        renderSignalsTable(transformedData)
+        
+        // Add accessibility attributes
+        const table = document.getElementById('signalsTable')
+        table.setAttribute('role', 'table')
+        table.setAttribute('aria-label', 'Katana HYG Trading Signals')
+        
+        // Update title with data source info
+        const title = document.querySelector('h1')
+        if (sourceData.length > 8) { // More than sample data
+          title.textContent = `Katana HYG Signals (${transformedData.length} active)`
+        }
+        
+      } catch (error) {
+        console.error('Failed to initialize table:', error)
+        document.getElementById('tableBody').innerHTML = 
+          '<tr><td colspan="8" style="text-align: center; color: var(--katana-negative); padding: 2rem;">Failed to load signals data</td></tr>'
+      }
+    }
+
+    // Initialize on DOM ready
+    document.addEventListener('DOMContentLoaded', initializeTable)
   </script>
 </body>
 </html>
