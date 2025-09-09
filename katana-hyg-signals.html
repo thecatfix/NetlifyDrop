@@ -5,123 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Katana HYG Signals</title>
   <style>
-    body {
-      margin: 0;
-      background: #0b1220;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
+    :root{
+      --bg:#0b1220;
+      --card:#111827;
+      --fg:#ffffff;
+      --muted:rgba(255,255,255,0.65);
+      --line:rgba(255,255,255,0.1);
+      --pos:#a6e3a1;
+      --neg:#f38ba8;
+      --accent:#00d4e4;
     }
-    h1 {
-      text-align: center;
-      margin: 1.5rem 0;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
-    .table-card {
-      max-width: 1400px;
-      margin: 0 auto;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      background: #111827;
-      overflow-x: auto;
+    h1{
+      text-align:center;
+      margin:1.4rem 0;
+      letter-spacing:.02em;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.95rem;
+    .table-card{
+      max-width:1400px;
+      margin:0 auto 2rem auto;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:var(--card);
+      overflow-x:auto;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
     }
-    thead {
-      background: rgba(255,255,255,0.05);
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:.95rem;
+      min-width:900px;
     }
-    th, td {
-      padding: 0.8rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
+    thead th{
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
     }
-    .priority {
-      font-weight: 800;
-      font-size: 1.2rem;
-      white-space: nowrap;
+    th, td{
+      padding:.9rem .8rem;
+      border-bottom:1px solid var(--line);
+      text-align:center;
     }
-    .bond-title {
-      font-weight: 600;
-      font-size: 1rem;
+    thead{
+      background:rgba(255,255,255,.05);
     }
-    .bond-sub {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.6);
+    thead .group th{
+      background:rgba(255,255,255,.06);
+      font-size:.85rem;
     }
-    .metric {
-      font-weight: 600;
+    .priority{
+      font-weight:800;
+      font-size:1.1rem;
+      white-space:nowrap;
     }
-    .positive {
-      color: #a6e3a1;
+    .bond-cell{
+      text-align:left;
+      max-width:420px;
     }
-    .negative {
-      color: #f38ba8;
+    .bond-title{
+      font-weight:700;
+      font-size:1rem;
     }
-    .signal {
-      font-weight: 700;
-      text-transform: uppercase;
+    .bond-sub{
+      font-size:.82rem;
+      color:var(--muted);
+      margin-top:.15rem;
     }
-    .signal-strong {
-      background: linear-gradient(90deg, #a6e3a1, #94e2d5);
-      color: #0b1220;
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      display: inline-block;
+    .price{
+      font-variant-numeric:tabular-nums;
+      white-space:nowrap;
     }
-    .signal-medium {
-      background: rgba(249, 226, 175, 0.2);
-      color: #f9e2af;
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      display: inline-block;
+    .metric{
+      font-weight:700;
+      font-variant-numeric:tabular-nums;
     }
-    .signal-weak {
-      background: rgba(255, 255, 255, 0.08);
-      color: rgba(255,255,255,0.7);
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      display: inline-block;
+    .metric.positive{ color:var(--pos); }
+    .metric.negative{ color:var(--neg); }
+    .signal{
+      font-weight:800;
+      text-transform:uppercase;
+      display:inline-block;
+      padding:.25rem .6rem;
+      border-radius:6px;
     }
-    .confidence {
-      text-align: center;
-      white-space: nowrap;
+    .signal-strong{ background:linear-gradient(90deg,#a6e3a1,#94e2d5); color:#0b1220; }
+    .signal-medium{ background:rgba(249,226,175,.2); color:#f9e2af; }
+    .signal-weak{ background:rgba(255,255,255,.08); color:var(--muted); }
+    .confidence{ white-space:nowrap; }
+    .confidence-bar{
+      width:120px; height:8px; border-radius:4px;
+      background:rgba(255,255,255,.12); overflow:hidden;
+      margin:0 auto .25rem auto;
     }
-    .confidence-bar {
-      background: rgba(255,255,255,0.1);
-      height: 8px;
-      border-radius: 4px;
-      overflow: hidden;
-      margin: 0 auto 0.25rem auto;
-      width: 120px;
-    }
-    .confidence-fill {
-      background: #00d4e4;
-      height: 100%;
-    }
-    .confidence-text {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.6);
-    }
-    .match-indicator {
-      font-size: 1rem;
-    }
+    .confidence-fill{ height:100%; background:var(--accent); }
+    .confidence-text{ font-size:.82rem; color:var(--muted); }
+    .match-indicator{ font-size:1rem; }
+    /* Zebra striping for readability */
+    tbody tr:nth-child(even){ background:rgba(255,255,255,0.03); }
   </style>
 </head>
 <body>
   <h1>Katana HYG Signals</h1>
   <div class="table-card">
-    <table id="signalsTable">
+    <table id="signalsTable" aria-describedby="Signals for Buy/Sell bond pairs">
       <thead>
+        <tr class="group">
+          <th rowspan="2">#</th>
+          <th colspan="2">Buy Side</th>
+          <th colspan="2">Sell Side</th>
+          <th rowspan="2">Price Diff</th>
+          <th rowspan="2">Signal</th>
+          <th rowspan="2">Confidence</th>
+          <th rowspan="2">Matches</th>
+        </tr>
         <tr>
-          <th>#</th>
           <th>Buy Bond</th>
+          <th>Price</th>
           <th>Sell Bond</th>
-          <th>Price Diff</th>
-          <th>Yield Diff</th>
-          <th>Signal</th>
-          <th>Confidence</th>
-          <th>Matches</th>
+          <th>Price</th>
         </tr>
       </thead>
       <tbody id="tableBody"></tbody>
@@ -129,71 +136,80 @@
   </div>
 
   <script>
-    // Example data (no ratings or YTM columns; price/yield diffs kept as metrics)
+    // Example data (NO rating columns, NO YTM columns)
     const signals = [
       {
         priority: 1,
-        buy_description: "ARDAGH 5.250% 08/27",
+        buy_description: "ARDAGH 5.250% 08/2027 [144A]",
         buy_price: 41.57,
-        sell_description: "CLARIOS 8.500% 05/27",
+        sell_description: "CLARIOS 8.500% 05/2027 [144A]",
         sell_price: 100.17,
-        price_diff: 58.6,
-        yield_diff: 47.75,
+        price_diff: 58.60,
         signal_strength: "STRONG",
-        confidence: 95,
+        confidence: 100,
         matchIndicator: "⏱ 🏢"
       },
       {
         priority: 2,
-        buy_description: "ARDAGH 5.250% 08/27",
+        buy_description: "ARDAGH 5.250% 08/2027 [144A]",
         buy_price: 41.90,
-        sell_description: "AG 8.630% 09/27",
-        sell_price: 102.52,
-        price_diff: 60.62,
-        yield_diff: 46.81,
+        sell_description: "CLARIOS 8.500% 05/2027 [144A]",
+        sell_price: 100.17,
+        price_diff: 58.27,
         signal_strength: "STRONG",
-        confidence: 90,
-        matchIndicator: "⏱"
+        confidence: 100,
+        matchIndicator: "⏱ 🏢"
+      },
+      {
+        priority: 3,
+        buy_description: "ARDAGH 5.250% 08/2027 [144A]",
+        buy_price: 41.57,
+        sell_description: "AG 8.630% 09/2027 [144A]",
+        sell_price: 102.52,
+        price_diff: 60.95,
+        signal_strength: "STRONG",
+        confidence: 100,
+        matchIndicator: "⏱ 🏢"
       }
     ];
+
+    function safeNum(n, d=0){ const x = Number(n); return Number.isFinite(x) ? x : d; }
 
     function renderTable(rows){
       const tbody = document.getElementById('tableBody');
       tbody.innerHTML = '';
       rows.forEach(signal => {
         const row = document.createElement('tr');
+        const priceDiff = safeNum(signal.price_diff);
         row.innerHTML = `
-          <td class="priority">${signal.priority}</td>
+          <td class="priority">${signal.priority ?? ""}</td>
 
           <!-- Buy Side -->
-          <td class="description">
-            <div class="bond-title">${signal.buy_description}</div>
-            <div class="bond-sub">Price: $${Number(signal.buy_price).toFixed(2)}</div>
+          <td class="bond-cell">
+            <div class="bond-title">${signal.buy_description ?? ""}</div>
           </td>
+          <td class="price">$${safeNum(signal.buy_price).toFixed(2)}</td>
 
           <!-- Sell Side -->
-          <td class="description">
-            <div class="bond-title">${signal.sell_description}</div>
-            <div class="bond-sub">Price: $${Number(signal.sell_price).toFixed(2)}</div>
+          <td class="bond-cell">
+            <div class="bond-title">${signal.sell_description ?? ""}</div>
           </td>
+          <td class="price">$${safeNum(signal.sell_price).toFixed(2)}</td>
 
           <!-- Metrics -->
-          <td class="metric price-diff ${signal.price_diff >= 0 ? "positive" : "negative"}">
-            ${Number(signal.price_diff).toFixed(2)}
-          </td>
-          <td class="metric yield-diff ${signal.yield_diff >= 0 ? "positive" : "negative"}">
-            ${Number(signal.yield_diff).toFixed(2)}%
+          <td class="metric ${priceDiff >= 0 ? 'positive' : 'negative'}">
+            ${priceDiff.toFixed(2)}
           </td>
           <td class="signal signal-${String(signal.signal_strength || '').toLowerCase()}">
-            ${signal.signal_strength}
+            ${signal.signal_strength ?? ""}
           </td>
           <td class="confidence">
             <div class="confidence-bar" aria-label="Confidence">
-              <div class="confidence-fill" style="width: ${Number(signal.confidence)}%"></div>
+              <div class="confidence-fill" style="width: ${safeNum(signal.confidence).toFixed(0)}%"></div>
             </div>
-            <span class="confidence-text">${Number(signal.confidence).toFixed(0)}%</span>
+            <span class="confidence-text">${safeNum(signal.confidence).toFixed(0)}%</span>
           </td>
-          <td class="match-indicator">${signal.matchIndicator || ""}</td>
+          <td class="match-indicator">${signal.matchIndicator ?? ""}</td>
         `;
         tbody.appendChild(row);
       });
