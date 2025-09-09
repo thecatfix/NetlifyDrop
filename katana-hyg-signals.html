@@ -1,192 +1,252 @@
-<!DOCTYPE html>
+# Write a corrected, self-contained HTML file that maps the provided `signalsData` structure
+# to the intended table columns (no rating/side YTM columns; use description as the bond label).
+html = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katana HYG Bond Signals</title>
-    <style>
-        body {
-            background-color: #1a1b26;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: white;
-            text-align: center;
-        }
-        .info {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .averages {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-        }
-        .average-item {
-            background: #2a2b36;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .filters {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            text-align: left;
-            color: white;
-        }
-        th {
-            background-color: #333;
-        }
-        tr:nth-child(even) {
-            background-color: #2a2b36;
-        }
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            color: white;
-        }
-        /* Cell Styles */
-        .description {
-            color: white;
-            font-size: 1.2rem;
-        }
-        .price {
-            font-weight: 600;
-            text-align: right;
-            color: white;
-        }
-        .confidence-bar {
-            width: 100px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-        .confidence-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #01a8b5 0%, #00d4e4 100%);
-            transition: width 0.3s ease;
-        }
-        .match-true {
-            color: white;
-            text-align: center;
-        }
-        .match-false {
-            color: white;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Katana HYG Signals</title>
+
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111827;
+      --muted: rgba(255,255,255,0.6);
+      --muted2: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.1);
+      --positive: #a6e3a1;
+      --negative: #f38ba8;
+      --accent: #00d4e4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #fff;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    h1 {
+      text-align: center;
+      margin: 1.25rem 0 1rem;
+      letter-spacing: 0.02em;
+    }
+    .table-card {
+      max-width: 1400px;
+      margin: 0 auto 2rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+      overflow-x: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      table-layout: auto;
+    }
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+    th, td {
+      padding: 0.9rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      vertical-align: middle;
+    }
+    tbody tr:hover {
+      background: rgba(255,255,255,0.03);
+    }
+    .priority {
+      font-weight: 800;
+      font-size: 1.05rem;
+      white-space: nowrap;
+    }
+    .description {
+      text-align: left;
+      min-width: 320px;
+    }
+    .bond-title {
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+    .bond-sub {
+      margin-top: 0.25rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .metric {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .positive { color: var(--positive); }
+    .negative { color: var(--negative); }
+    .signal {
+      font-weight: 800;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .signal-strong {
+      background: linear-gradient(90deg, #a6e3a1, #94e2d5);
+      color: #0b1220;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    .signal-medium {
+      background: rgba(249, 226, 175, 0.2);
+      color: #f9e2af;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    .signal-weak {
+      background: var(--muted2);
+      color: rgba(255,255,255,0.7);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    .confidence {
+      text-align: center;
+      white-space: nowrap;
+    }
+    .confidence-bar {
+      background: var(--muted2);
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+
+      margin: 0 auto 0.25rem auto;
+      width: 120px;
+    }
+
+    .confidence-fill {
+      background: var(--accent);
+      height: 100%;
+    }
+    .confidence-text {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .match-indicator { font-size: 1.1rem; }
+    .footer {
+      max-width: 1400px;
+      margin: -1rem auto 2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 0 0.5rem;
+    }
+    @media (max-width: 720px) {
+      .description { min-width: 260px; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Katana HYG Bond Signals</h1>
-    
-    <div class="info">
-        <p>Generated: 2025-09-08 18:02:31 UTC</p>
-        <p>Total Signals: 50</p>
-        <p>Data Source: BlackRock HYG ETF Holdings</p>
-    </div>
-    
-    <div class="averages">
-        <div class="average-item">
-            <p>Avg Price Differential</p>
-            <p>$60.65</p>
-        </div>
-        <div class="average-item">
-            <p>Avg Yield Differential</p>
-            <p>45.51%</p>
-        </div>
-        <div class="average-item">
-            <p>Avg Spread Compression</p>
-            <p>4543 bps</p>
-        </div>
-        <div class="average-item">
-            <p>Avg Confidence</p>
-            <p>100.0%</p>
-        </div>
-    </div>
-    
-    <div class="filters">
-        <div>
-            <p>Signal Strength:</p>
-            <select>
-                <option>All</option>
-                <option>Strong</option>
-                <option>Medium</option>
-                <option>Weak</option>
-            </select>
-        </div>
-        <div>
-            <p>Min Confidence:</p>
-            <select>
-                <option>All</option>
-                <option>50%+</option>
-                <option>75%+</option>
-                <option>90%+</option>
-            </select>
-        </div>
-    </div>
-    
-    <table id="signalsTable">
-        <thead>
-            <tr>
-                <th>Priority</th>
-                <th>Buy Bond</th>
-                <th>Price</th>
-                <th>Sell Bond</th>
-                <th>Price</th>
-                <th>Price Diff</th>
-                <th>Signal Confidence</th>
-                <th>Matches</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
+  <h1>Katana HYG Signals</h1>
+  <div class="table-card">
+    <table id="signalsTable" aria-describedby="tableDesc">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Buy Bond</th>
+          <th>Sell Bond</th>
+          <th>Price Diff</th>
+          <th>Yield Diff</th>
+          <th>Signal</th>
+          <th>Confidence</th>
+          <th>Matches</th>
+        </tr>
+      </thead>
+
+      <tbody id="tableBody" role="rowgroup"></tbody>
     </table>
-    
-    <footer>
-        <p>© 2025 Katana Signal Engine | Powered by KatanaSignalEngine</p>
-        <p>High-yield bond trading signals generated using neural network analysis</p>
-    </footer>
+  </div>
+  <div id="tableDesc" class="footer">Description = bond label. No ratings or per-side YTM columns are shown; only aggregate metrics are displayed.</div>
 
-    <script>
-        // Signal data
-        const signalsData = [
-            {"priority": 1, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CLARIOS", "sell_description": "CLARIOS 8.500% 05/2027 [144A]", "sell_price": 100.17, "sell_ytm": 2.25, "sell_isin": "US69867DAC20", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.6, "yield_diff": 47.75, "spread_compression": 4757.9, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}
-            // Add more signal data as needed
-        ];
+  <script>
+    const sampleSignals = [{"priority": 1, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CLARIOS", "sell_description": "CLARIOS 8.500% 05/2027 [144A]", "sell_price": 100.17, "sell_ytm": 2.25, "sell_isin": "US69867DAC20", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.6, "yield_diff": 47.75, "spread_compression": 4757.9, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 2, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CLARIOS", "sell_description": "CLARIOS 8.500% 05/2027 [144A]", "sell_price": 100.17, "sell_ytm": 2.25, "sell_isin": "US69867DAC20", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.27, "yield_diff": 47.75, "spread_compression": 4757.9, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 3, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "AG", "sell_description": "AG 8.630% 09/2027 [144A]", "sell_price": 102.52, "sell_ytm": 3.19, "sell_isin": "US00840KAA79", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 60.95, "yield_diff": 46.81, "spread_compression": 4664.3, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 4, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "AG", "sell_description": "AG 8.630% 09/2027 [144A]", "sell_price": 102.52, "sell_ytm": 3.19, "sell_isin": "US00840KAA79", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 60.62, "yield_diff": 46.81, "spread_compression": 4664.3, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 5, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SIRIUS", "sell_description": "SIRIUS 3.130% 09/2026 [144A]", "sell_price": 99.34, "sell_ytm": 3.81, "sell_isin": "US82967NBL10", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 57.77, "yield_diff": 46.19, "spread_compression": 4610.0, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 6, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SIRIUS", "sell_description": "SIRIUS 3.130% 09/2026 [144A]", "sell_price": 99.34, "sell_ytm": 3.81, "sell_isin": "US82967NBL10", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 57.4, "yield_diff": 46.19, "spread_compression": 4610.0, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 7, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "APTIV", "sell_description": "APTIV 6.880% 12/2054", "sell_price": 101.33, "sell_ytm": 4.28, "sell_isin": "US03837AAD28", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 68.66, "yield_diff": 45.72, "spread_compression": 4560.1, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 8, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "APTIV", "sell_description": "APTIV 6.880% 12/2054", "sell_price": 101.33, "sell_ytm": 4.28, "sell_isin": "US03837AAD28", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 66.4, "yield_diff": 45.72, "spread_compression": 4556.7, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 9, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "DANA", "sell_description": "DANA 4.250% 09/2030", "sell_price": 99.17, "sell_ytm": 4.44, "sell_isin": "US235825AH97", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 66.5, "yield_diff": 45.56, "spread_compression": 4547.5, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 10, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "DANA", "sell_description": "DANA 4.250% 09/2030", "sell_price": 99.17, "sell_ytm": 4.44, "sell_isin": "US235825AH97", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 64.1, "yield_diff": 45.56, "spread_compression": 4544.1, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 11, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "UNITED", "sell_description": "UNITED 3.880% 11/2027", "sell_price": 98.66, "sell_ytm": 4.52, "sell_isin": "US911365BM59", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 65.99, "yield_diff": 45.48, "spread_compression": 4543.8, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 12, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "UNITED", "sell_description": "UNITED 3.880% 11/2027", "sell_price": 98.66, "sell_ytm": 4.52, "sell_isin": "US911365BM59", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 63.79, "yield_diff": 45.48, "spread_compression": 4547.2, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 13, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CROWN", "sell_description": "CROWN 4.250% 09/2026", "sell_price": 99.7, "sell_ytm": 4.54, "sell_isin": "US22819KAB61", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.13, "yield_diff": 45.46, "spread_compression": 4536.4, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 14, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CROWN", "sell_description": "CROWN 4.250% 09/2026", "sell_price": 99.7, "sell_ytm": 4.54, "sell_isin": "US22819KAB61", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 57.8, "yield_diff": 45.46, "spread_compression": 4536.4, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 15, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "HOLOGIC", "sell_description": "HOLOGIC 3.250% 02/2029 [144A]", "sell_price": 95.86, "sell_ytm": 4.56, "sell_isin": "US436440AP62", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 63.19, "yield_diff": 45.44, "spread_compression": 4539.6, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 16, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "HOLOGIC", "sell_description": "HOLOGIC 3.250% 02/2029 [144A]", "sell_price": 95.86, "sell_ytm": 4.56, "sell_isin": "US436440AP62", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 60.99, "yield_diff": 45.44, "spread_compression": 4536.2, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 17, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SPIRIT", "sell_description": "SPIRIT 4.600% 06/2028", "sell_price": 100.07, "sell_ytm": 4.57, "sell_isin": "US85205TAK60", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 67.3, "yield_diff": 45.43, "spread_compression": 4542.8, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 18, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SPIRIT", "sell_description": "SPIRIT 4.600% 06/2028", "sell_price": 100.07, "sell_ytm": 4.57, "sell_isin": "US85205TAK60", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 65.19, "yield_diff": 45.43, "spread_compression": 4539.8, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 19, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CALPINE", "sell_description": "CALPINE 3.750% 03/2031 [144A]", "sell_price": 95.55, "sell_ytm": 4.68, "sell_isin": "US131347CR51", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 62.879999999999995, "yield_diff": 45.32, "spread_compression": 4513.8, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 20, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CALPINE", "sell_description": "CALPINE 3.750% 03/2031 [144A]", "sell_price": 95.55, "sell_ytm": 4.68, "sell_isin": "US131347CR51", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 60.68, "yield_diff": 45.32, "spread_compression": 4510.4, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 21, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CALPINE", "sell_description": "CALPINE 4.500% 02/2028 [144A]", "sell_price": 99.49, "sell_ytm": 4.72, "sell_isin": "US131347CM64", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 57.919999999999995, "yield_diff": 45.28, "spread_compression": 4522.7, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 22, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CALPINE", "sell_description": "CALPINE 4.500% 02/2028 [144A]", "sell_price": 99.49, "sell_ytm": 4.72, "sell_isin": "US131347CM64", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 57.59, "yield_diff": 45.28, "spread_compression": 4522.7, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 23, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "HILTON", "sell_description": "HILTON 3.750% 05/2029 [144A]", "sell_price": 96.75, "sell_ytm": 4.73, "sell_isin": "US432833AJ07", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 64.08, "yield_diff": 45.27, "spread_compression": 4523.8, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 24, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "DPL", "sell_description": "DPL 4.350% 04/2029", "sell_price": 98.74, "sell_ytm": 4.73, "sell_isin": "US233293AQ29", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 66.07, "yield_diff": 45.27, "spread_compression": 4519.9, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 25, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "HILTON", "sell_description": "HILTON 3.750% 05/2029 [144A]", "sell_price": 96.75, "sell_ytm": 4.73, "sell_isin": "US432833AJ07", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 61.88, "yield_diff": 45.27, "spread_compression": 4520.4, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 26, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "DPL", "sell_description": "DPL 4.350% 04/2029", "sell_price": 98.74, "sell_ytm": 4.73, "sell_isin": "US233293AQ29", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 63.87, "yield_diff": 45.27, "spread_compression": 4516.5, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 27, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "VF", "sell_description": "VF 2.800% 04/2027", "sell_price": 97.0, "sell_ytm": 4.73, "sell_isin": "US918204BB37", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 55.43, "yield_diff": 45.27, "spread_compression": 4525.1, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 28, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SERVICE", "sell_description": "SERVICE 4.630% 12/2027", "sell_price": 99.77, "sell_ytm": 4.73, "sell_isin": "US817565CD49", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.2, "yield_diff": 45.27, "spread_compression": 4518.1, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 29, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "VF", "sell_description": "VF 2.800% 04/2027", "sell_price": 97.0, "sell_ytm": 4.73, "sell_isin": "US918204BB37", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 55.1, "yield_diff": 45.27, "spread_compression": 4525.1, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 30, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SERVICE", "sell_description": "SERVICE 4.630% 12/2027", "sell_price": 99.77, "sell_ytm": 4.73, "sell_isin": "US817565CD49", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 57.87, "yield_diff": 45.27, "spread_compression": 4518.1, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 31, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "NUSTAR", "sell_description": "NUSTAR 6.380% 10/2030", "sell_price": 103.76, "sell_ytm": 4.74, "sell_isin": "US67059TAH86", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 71.09, "yield_diff": 45.26, "spread_compression": 4503.0, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 32, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "NUSTAR", "sell_description": "NUSTAR 6.380% 10/2030", "sell_price": 103.76, "sell_ytm": 4.74, "sell_isin": "US67059TAH86", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 68.89000000000001, "yield_diff": 45.26, "spread_compression": 4499.6, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 33, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "KFC", "sell_description": "KFC 4.750% 06/2027 [144A]", "sell_price": 99.99, "sell_ytm": 4.75, "sell_isin": "US48250NAC92", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.419999999999995, "yield_diff": 45.25, "spread_compression": 4510.3, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 34, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "KFC", "sell_description": "KFC 4.750% 06/2027 [144A]", "sell_price": 99.99, "sell_ytm": 4.75, "sell_isin": "US48250NAC92", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.09, "yield_diff": 45.25, "spread_compression": 4510.3, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 35, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "PRIME", "sell_description": "PRIME 3.380% 08/2027 [144A]", "sell_price": 97.41, "sell_ytm": 4.76, "sell_isin": "US74166MAF32", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 55.84, "yield_diff": 45.24, "spread_compression": 4523.5, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 36, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SLM", "sell_description": "SLM 3.130% 11/2026", "sell_price": 98.18, "sell_ytm": 4.76, "sell_isin": "US78442PGE07", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 56.61000000000001, "yield_diff": 45.24, "spread_compression": 4517.7, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 37, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "AMERICAN", "sell_description": "AMERICAN 4.000% 01/2028 [144A]", "sell_price": 98.31, "sell_ytm": 4.76, "sell_isin": "US024747AF43", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 56.74, "yield_diff": 45.24, "spread_compression": 4523.4, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 38, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "PRIME", "sell_description": "PRIME 3.380% 08/2027 [144A]", "sell_price": 97.41, "sell_ytm": 4.76, "sell_isin": "US74166MAF32", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 55.51, "yield_diff": 45.24, "spread_compression": 4523.5, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 39, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "SLM", "sell_description": "SLM 3.130% 11/2026", "sell_price": 98.18, "sell_ytm": 4.76, "sell_isin": "US78442PGE07", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 56.28000000000001, "yield_diff": 45.24, "spread_compression": 4517.7, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 40, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "AMERICAN", "sell_description": "AMERICAN 4.000% 01/2028 [144A]", "sell_price": 98.31, "sell_ytm": 4.76, "sell_isin": "US024747AF43", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 56.41, "yield_diff": 45.24, "spread_compression": 4523.4, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 41, "buy_ticker": "UNIFRAX", "buy_description": "UNIFRAX 5.250% 09/2028 [144A]", "buy_price": 32.67, "buy_ytm": 50.0, "buy_isin": "US90473LAA08", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "FAIR", "sell_description": "FAIR 4.000% 06/2028 [144A]", "sell_price": 98.0, "sell_ytm": 4.78, "sell_isin": "US303250AF16", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 65.33, "yield_diff": 45.22, "spread_compression": 4517.8, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 42, "buy_ticker": "ALTICE", "buy_description": "ALTICE 6.000% 02/2028 [144A]", "buy_price": 34.87, "buy_ytm": 50.0, "buy_isin": "US02156TAA25", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "FAIR", "sell_description": "FAIR 4.000% 06/2028 [144A]", "sell_price": 98.0, "sell_ytm": 4.78, "sell_isin": "US303250AF16", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 63.13, "yield_diff": 45.22, "spread_compression": 4521.2, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 43, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "MGM", "sell_description": "MGM 4.630% 09/2026", "sell_price": 99.84, "sell_ytm": 4.79, "sell_isin": "US552953CD18", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.27, "yield_diff": 45.21, "spread_compression": 4511.9, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 44, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "AXALTA", "sell_description": "AXALTA 4.750% 06/2027 [144A]", "sell_price": 99.92, "sell_ytm": 4.79, "sell_isin": "US05454NAA72", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.35, "yield_diff": 45.21, "spread_compression": 4508.3, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 45, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "MGM", "sell_description": "MGM 4.630% 09/2026", "sell_price": 99.84, "sell_ytm": 4.79, "sell_isin": "US552953CD18", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 57.940000000000005, "yield_diff": 45.21, "spread_compression": 4511.9, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 46, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "AXALTA", "sell_description": "AXALTA 4.750% 06/2027 [144A]", "sell_price": 99.92, "sell_ytm": 4.79, "sell_isin": "US05454NAA72", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 58.02, "yield_diff": 45.21, "spread_compression": 4508.3, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 47, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CELANESE", "sell_description": "CELANESE 6.670% 07/2027", "sell_price": 102.83, "sell_ytm": 4.8, "sell_isin": "US15089QAM69", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 61.26, "yield_diff": 45.2, "spread_compression": 4519.3, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 48, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "CELANESE", "sell_description": "CELANESE 6.670% 07/2027", "sell_price": 102.83, "sell_ytm": 4.8, "sell_isin": "US15089QAM69", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 60.93, "yield_diff": 45.2, "spread_compression": 4519.3, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 49, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.57, "buy_ytm": 50.0, "buy_isin": "US03969AAR14", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "LIVE", "sell_description": "LIVE 3.750% 01/2028 [144A]", "sell_price": 97.66, "sell_ytm": 4.81, "sell_isin": "US538034AX75", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 56.09, "yield_diff": 45.19, "spread_compression": 4516.6, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}, {"priority": 50, "buy_ticker": "ARDAGH", "buy_description": "ARDAGH 5.250% 08/2027 [144A]", "buy_price": 41.9, "buy_ytm": 50.0, "buy_isin": "US03969AAP57", "buy_rating": "NR", "buy_sector": "OTHER", "sell_ticker": "LIVE", "sell_description": "LIVE 3.750% 01/2028 [144A]", "sell_price": 97.66, "sell_ytm": 4.81, "sell_isin": "US538034AX75", "sell_rating": "NR", "sell_sector": "OTHER", "price_diff": 55.76, "yield_diff": 45.19, "spread_compression": 4516.6, "signal_strength": "STRONG", "confidence": 100.0, "duration_match": true, "sector_match": true}];j
 
-        // Populate table
-        const tbody = document.querySelector('#signalsTable tbody');
-        signalsData.forEach(signal => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${signal.priority}</td>
-                <td class="description">${signal.buy_description}</td>
-                <td class="price">${signal.buy_price}</td>
-                <td class="description">${signal.sell_description}</td>
-                <td class="price">${signal.sell_price}</td>
-                <td class="price">${signal.price_diff}</td>
-                <td>
-                    <div class="confidence-bar">
-                        <div class="confidence-fill" style="width: ${signal.confidence}%;"></div>
-                    </div>
-                </td>
-                <td class="match-true">${signal.duration_match ? '✓' : '✗'}</td>
-            `;
-            tbody.appendChild(row);
-        });
-    </script>
-</body>
+    ];
+// Fallback (if dataset is empty)
+  const sampleSignals = [
+    {
+      priority: 1,
+      buy_description: "Sample Bond",
+      buy_price: 41.57,
+      sell_description: "Other Bond",
+      sell_price: 100.17,
+      price_diff: 58.60,
+      yield_diff: 47.75,
+      signal_strength: "STRONG",
+      confidence: 100,
+      duration_match: true,
+      sector_match: true
+    }
+  ];
+
+  // Pick dataset
+  const signals = (Array.isArray(signalsData) && signalsData.length) ? signalsData : sampleSignals;
+
+  function fmt(n, d=2) {
+    const x = Number(n);
+    return Number.isFinite(x) ? x.toFixed(d) : "--";
+  }
+
+  function renderTable(rows) {
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+    rows
+      .slice()
+      .sort((a,b) => Number(a.priority) - Number(b.priority))
+      .forEach(signal => {
+        const durationOk = !!signal.duration_match;
+        const sectorOk = !!signal.sector_match;
+        const matchIndicator = (durationOk ? "⏱" : "—") + (sectorOk ? " 🏢" : "");
+        const priceDiff = Number(signal.price_diff);
+        const yieldDiff = Number(signal.yield_diff);
+        const conf = Number(signal.confidence);
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="priority">${signal.priority}</td>
+          <td class="description">
+            <div class="bond-title">${signal.buy_description || ""}</div>
+            <div class="bond-sub">Price: $${fmt(signal.buy_price)}</div>
+          </td>
+          <td class="description">
+            <div class="bond-title">${signal.sell_description || ""}</div>
+            <div class="bond-sub">Price: $${fmt(signal.sell_price)}</div>
+          </td>
+          <td class="metric ${priceDiff >= 0 ? 'positive' : 'negative'}">${fmt(priceDiff)}</td>
+          <td class="metric ${yieldDiff >= 0 ? 'positive' : 'negative'}">${fmt(yieldDiff)}%</td>
+          <td class="signal">
+            <span class="signal-${String(signal.signal_strength || '').toLowerCase()}">
+              ${signal.signal_strength || ""}
+            </span>
+          </td>
+          <td class="confidence">
+            <div class="confidence-bar">
+              <div class="confidence-fill" style="width:${Math.max(0, Math.min(100, conf))}%"></div>
+            </div>
+            <span class="confidence-text">${Number.isFinite(conf) ? conf.toFixed(0) : "--"}%</span>
+          </td>
+          <td class="match-indicator">${matchIndicator}</td>
+        `;
+        tbody.appendChild(row);
+      });
+  }
+
+  // Render table once dataset is ready
+  renderTable(signals);
+</script>
+    </body>
 </html>
