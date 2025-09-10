@@ -550,7 +550,272 @@
       return matches.join(' ')
     }
 
-    // Sample Data
+    
+    // Injected live data from HYG pipeline
+    window.signalsData = [
+  {
+    "priority": 1,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "1261229 BC LTD 144A",
+    "sell_price": 103.78,
+    "price_diff": 76.28,
+    "yield_diff": 40.78,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 2,
+    "buy_description": "UNIFRAX ESCROW ISSUER CORP 144A",
+    "buy_price": 32.89,
+    "sell_description": "1261229 BC LTD 144A",
+    "sell_price": 103.78,
+    "price_diff": 70.89,
+    "yield_diff": 40.78,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 3,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "MEDLINE BORROWER LP 144A",
+    "sell_price": 95.98,
+    "price_diff": 68.48,
+    "yield_diff": 44.88,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 4,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "QUIKRETE HOLDINGS INC 144A",
+    "sell_price": 103.88,
+    "price_diff": 76.38,
+    "yield_diff": 44.35,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 5,
+    "buy_description": "UNIFRAX ESCROW ISSUER CORP 144A",
+    "buy_price": 32.89,
+    "sell_description": "QUIKRETE HOLDINGS INC 144A",
+    "sell_price": 103.88,
+    "price_diff": 70.99,
+    "yield_diff": 44.35,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 6,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "VENTURE GLOBAL LNG INC 144A",
+    "sell_price": 110.23,
+    "price_diff": 82.73,
+    "yield_diff": 43.89,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 7,
+    "buy_description": "ALTICE FRANCE HOLDING SA 144A",
+    "buy_price": 35.85,
+    "sell_description": "VENTURE GLOBAL LNG INC 144A",
+    "sell_price": 110.23,
+    "price_diff": 74.38,
+    "yield_diff": 43.89,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 8,
+    "buy_description": "UNIFRAX ESCROW ISSUER CORP 144A",
+    "buy_price": 32.89,
+    "sell_description": "VENTURE GLOBAL LNG INC 144A",
+    "sell_price": 110.23,
+    "price_diff": 77.34,
+    "yield_diff": 43.89,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 9,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "PANTHER ESCROW ISSUER LLC 144A",
+    "sell_price": 103.38,
+    "price_diff": 75.88,
+    "yield_diff": 43.59,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 10,
+    "buy_description": "UNIFRAX ESCROW ISSUER CORP 144A",
+    "buy_price": 32.89,
+    "sell_description": "PANTHER ESCROW ISSUER LLC 144A",
+    "sell_price": 103.38,
+    "price_diff": 70.49,
+    "yield_diff": 43.59,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 11,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "AADVANTAGE LOYALTY IP LTD 144A",
+    "sell_price": 100.63,
+    "price_diff": 73.13,
+    "yield_diff": 44.51,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 12,
+    "buy_description": "UNIFRAX ESCROW ISSUER CORP 144A",
+    "buy_price": 32.89,
+    "sell_description": "AADVANTAGE LOYALTY IP LTD 144A",
+    "sell_price": 100.63,
+    "price_diff": 67.74,
+    "yield_diff": 44.51,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 13,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "EMRLD BORROWER LP 144A",
+    "sell_price": 102.87,
+    "price_diff": 75.37,
+    "yield_diff": 44.019999999999996,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 14,
+    "buy_description": "UNIFRAX ESCROW ISSUER CORP 144A",
+    "buy_price": 32.89,
+    "sell_description": "EMRLD BORROWER LP 144A",
+    "sell_price": 102.87,
+    "price_diff": 69.98,
+    "yield_diff": 44.019999999999996,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 15,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "CCO HOLDINGS LLC 144A",
+    "sell_price": 96.02,
+    "price_diff": 68.52,
+    "yield_diff": 44.230000000000004,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 16,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "TRANSDIGM INC 144A",
+    "sell_price": 101.7,
+    "price_diff": 74.2,
+    "yield_diff": 43.91,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 17,
+    "buy_description": "UNIFRAX ESCROW ISSUER CORP 144A",
+    "buy_price": 32.89,
+    "sell_description": "TRANSDIGM INC 144A",
+    "sell_price": 101.7,
+    "price_diff": 68.81,
+    "yield_diff": 43.91,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 18,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "CCO HOLDINGS LLC 144A",
+    "sell_price": 92.49,
+    "price_diff": 64.99,
+    "yield_diff": 44.11,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 19,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "DAVITA INC 144A",
+    "sell_price": 96.47,
+    "price_diff": 68.97,
+    "yield_diff": 44.519999999999996,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  },
+  {
+    "priority": 20,
+    "buy_description": "NFE FINANCING LLC MTN 144A",
+    "buy_price": 27.5,
+    "sell_description": "1011778 BC UNLIMITED LIABILITY CO 144A",
+    "sell_price": 94.2,
+    "price_diff": 66.7,
+    "yield_diff": 44.69,
+    "signal_strength": "STRONG",
+    "confidence": 100.0,
+    "duration_match": false,
+    "sector_match": false
+  }
+];
+    
+    // Original getSampleData function (kept as fallback)
     const getSampleData = () => [
       {
         priority: 1,
