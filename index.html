@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Katana — One Pager</title>
 
-  <!-- Consolidated stylesheet -->
-  <link rel="stylesheet" href="./styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css">
   
   <!-- Katana HYG Signals CSS -->
   <style>
@@ -431,21 +430,15 @@
     <a class="nav-link" href="./rebuild.html">Rebuild</a>
     <a class="nav-link" href="./vision.html">Vision</a>
     <a class="nav-link" href="./katana-hyg-signals.html">Live Signals</a>
+    <a class="nav-link" href="#chat">Chat With The Code</a>
     <a class="nav-link" href="#contact">Contact</a>
   </nav>
-
-  <!-- Breadcrumbs (optional) -->
-  <div class="breadcrumb" aria-label="Breadcrumb">
-    <a class="nav-link" href="#">Home</a>
-    <span class="breadcrumb-separator"></span>
-    <span>One Pager</span>
-  </div>
 
   <main class="container landing" id="story">
     <!-- Hero -->
     <section class="hero">
       <h1 class="hero-title">3.5 years. One engineer. Zero shortcuts.</h1>
-      <p class="hero-subtitle">A platform ready for the future. <em>(And a wife that’s about to murder him.)</em></p>
+      <p class="hero-subtitle"><em>(And a wife that’s about to murder him.)</em></p>
       <div class="hero-cta">
         <a class="btn btn--primary btn--large" href="#rebuild">How we built it →</a>
         <a class="btn btn--success" href="https://www.johnshelburne.com" target="_blank" rel="noopener">Talk to us</a>
@@ -601,6 +594,73 @@
       </div>
       <div id="tableDesc" class="footer">Enhanced Katana design with real-time KatanaSignalEngine data. Click rows for detailed information.</div>
     </section>
+
+    <!-- Chat With The Code - Gradio Interface -->
+    <section id="chat" class="blog-post">
+      <header class="blog-post-header">
+        <h2 class="blog-post-title">Chat With The Code</h2>
+        <p class="blog-post-excerpt">Interact with the Katana forensics database through our AI-powered interface. Ask questions about the codebase, architecture, and implementation details.</p>
+      </header>
+      <div class="blog-post-content">
+        <!-- Gradio placeholder -->
+        <div id="gradio-container" style="position: relative; width: 100%; min-height: 400px; margin: 2rem 0; background: rgba(255, 255, 255, 0.02); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 3rem;">
+          <div style="text-align: center;">
+            <h3 style="color: #01a8b5; margin-bottom: 1.5rem; font-size: 1.8rem;">Katana Code Chat Interface</h3>
+            <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem; max-width: 600px;">
+              Connect to the forensics database and explore the codebase through natural language queries. 
+              This interface runs locally on your machine for privacy and performance.
+            </p>
+            <button class="btn btn--primary btn--large" onclick="loadGradioInterface()" style="margin-bottom: 1rem;">
+              Launch Chat Interface
+            </button>
+            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.875rem; margin-top: 1rem;">
+              Requires local Gradio server on port 7860
+            </p>
+          </div>
+        </div>
+        
+        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(1, 168, 181, 0.1); border-left: 3px solid #01a8b5; border-radius: 6px;">
+          <p style="margin: 0 0 0.5rem 0; color: rgba(255, 255, 255, 0.87); font-size: 0.95rem;">
+            <strong>Setup Instructions:</strong>
+          </p>
+          <ol style="margin: 0; padding-left: 1.5rem; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">
+            <li>Navigate to the database directory: <code style="background: rgba(0,0,0,0.3); padding: 0.1rem 0.3rem; border-radius: 3px;">cd database</code></li>
+            <li>Run the Gradio app: <code style="background: rgba(0,0,0,0.3); padding: 0.1rem 0.3rem; border-radius: 3px;">python gradio_app.py</code></li>
+            <li>Click "Launch Chat Interface" above to connect</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+    
+    <script>
+      function loadGradioInterface() {
+        const container = document.getElementById('gradio-container');
+        container.innerHTML = `
+          <div style="position: absolute; width: 100%; padding-bottom: 75%;">
+            <iframe 
+              id="gradio-chat"
+              src="http://localhost:7860" 
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px;"
+              title="Katana Code Chat Interface">
+            </iframe>
+          </div>
+          <div style="position: absolute; top: 1rem; right: 1rem; z-index: 10; display: flex; gap: 0.5rem;">
+            <button class="btn btn--secondary" onclick="reloadGradioInterface()" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Refresh</button>
+            <button class="btn btn--secondary" onclick="window.open('http://localhost:7860', '_blank')" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Full Screen</button>
+          </div>
+        `;
+        container.style.minHeight = '0';
+        container.style.padding = '0';
+        container.style.paddingBottom = '75%';
+      }
+      
+      function reloadGradioInterface() {
+        const iframe = document.getElementById('gradio-chat');
+        if (iframe) {
+          iframe.src = iframe.src;
+        }
+      }
+    </script>
 
     <!-- Contact -->
     <section id="contact" class="blog-post text-center">

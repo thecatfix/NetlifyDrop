@@ -4,44 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Katana — Rebuild</title>
-
-  <!-- Use existing consolidated stylesheet -->
-  <link rel="stylesheet" href="./styles.css">
-
-  <style>
-    .layout{display:grid;grid-template-columns:260px 1fr;gap:32px}
-    @media (max-width:1024px){.layout{grid-template-columns:1fr}.toc{display:none}}
-    .surface{background:#151821;border:1px solid #232736;border-radius:12px}
-    .section-title{margin:0 0 12px;border-bottom:1px solid #232736;padding-bottom:8px}
-    .kv{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    @media (max-width:720px){.kv{grid-template-columns:1fr}}
-    .kv .card{padding:16px;border:1px solid #232736;border-radius:10px;background:#0f1115}
-    .evo-table{width:100%;border-collapse:collapse}
-    .evo-table th,.evo-table td{padding:10px 12px;border-bottom:1px solid #232736;text-align:left}
-    .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#1a1f2b;border:1px solid #2a3242;color:#9fb2c8;font-size:.8rem}
-    .diagram{background:#0f1115;border:1px solid #232736;border-radius:12px;padding:12px}
-    .muted{color:#9aa0aa}
-    .toc{position:sticky;top:80px;max-height:calc(100vh - 100px);overflow:auto;padding:24px}
-    .toc h4{margin-bottom:16px;color:#c9d1d9}
-    .toc a{display:block;padding:6px 0;color:#9aa0aa;text-decoration:none}
-    .toc a.active{color:#fff;font-weight:600}
-    .toc a:hover{color:#58a6ff}
-    .share{margin-top:16px}
-    .chip{display:inline-block;padding:4px 12px;margin:4px 8px 4px 0;border-radius:16px;background:#1a1f2b;border:1px solid #2a3242;color:#9fb2c8;font-size:0.85rem}
-    .rebuild-nav{background:var(--term-bg-secondary);border:1px solid #232736;padding:16px 24px;margin-bottom:32px;border-radius:8px}
-  </style>
+  <!-- Theme stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <nav class="nav surface rebuild-nav">
-    <a class="nav-brand" href="./index.html">Katana</a>
-    <div>
-      <a class="nav-link" href="https://www.catfix.biz/katana" target="_blank" rel="noopener">Story</a>
-      <a class="nav-link nav-link--active" href="#">Rebuild</a>
-      <a class="nav-link" href="./vision.html">Vision</a>
-      <a class="nav-link" href="https://www.johnshelburne.com" target="_blank" rel="noopener">Contact</a>
-    </div>
+   <!-- Top navigation -->
+  <nav class="nav" role="navigation" aria-label="Primary">
+    <a class="nav-brand" href="./">Katana</a>
+    <a class="nav-link nav-link--active" href="./index.html">One Pager</a>
+    <a class="nav-link" href="./katana-complete-investment-thesis.html">Investment Thesis</a>
+    <a class="nav-link" href="./rebuild.html">Rebuild</a>
+    <a class="nav-link" href="./vision.html">Vision</a>
+    <a class="nav-link" href="./katana-hyg-signals.html">Live Signals</a>
+    <a class="nav-link" href="#chat">Chat With The Code</a>
+    <a class="nav-link" href="#contact">Contact</a>
   </nav>
-
   <main class="container layout">
     <!-- TOC -->
     <aside class="toc surface">

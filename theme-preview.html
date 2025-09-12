@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Preview - Catppuccin Dark</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* Preview-specific styles */
+        .preview-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+        .color-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Components</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb" aria-label="Breadcrumb">
+            <a class="nav-link" href="#">Home</a>
+            <span class="breadcrumb-separator"></span>
+            <a class="nav-link" href="#">Documentation</a>
+            <span class="breadcrumb-separator"></span>
+            <span>Theme Preview</span>
+        </div>
+        
+        <h1>Theme Preview: Catppuccin Dark</h1>
+        <p class="text-secondary">A comprehensive preview of all theme elements and components</p>
+
+        <!-- Color Palette Section -->
+        <section class="preview-section">
+            <h2>Color Palette</h2>
+            <div class="preview-grid">
+                <div class="color-swatch">
+                    <div class="color-box" style="background: var(--bg-primary)"></div>
+                    <div>
+                        <strong>Primary BG</strong><br>
+                        <code>#232b42</code>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: var(--primary)"></div>
+                    <div>
+                        <strong>Primary</strong><br>
+                        <code>#fb923c</code>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: var(--secondary)"></div>
+                    <div>
+                        <strong>Secondary</strong><br>
+                        <code>#60a5fa</code>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: var(--accent)"></div>
+                    <div>
+                        <strong>Accent</strong><br>
+                        <code>#f97316</code>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: var(--success)"></div>
+                    <div>
+                        <strong>Success</strong><br>
+                        <code>#22c55e</code>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: var(--warning)"></div>
+                    <div>
+                        <strong>Warning</strong><br>
+                        <code>#f59e0b</code>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: var(--danger)"></div>
+                    <div>
+                        <strong>Danger</strong><br>
+                        <code>#ef4444</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breadcrumb Section -->
+        <section class="preview-section">
+            <h2>Breadcrumbs</h2>
+            <p>Default arrow separator:</p>
+            <div class="breadcrumb" aria-label="Breadcrumb">
+                <a class="nav-link" href="#">Home</a>
+                <span class="breadcrumb-separator"></span>
+                <a class="nav-link" href="#">Products</a>
+                <span class="breadcrumb-separator"></span>
+                <a class="nav-link" href="#">Category</a>
+                <span class="breadcrumb-separator"></span>
+                <span>Current Page</span>
+            </div>
+            
+            <p>Text separator:</p>
+            <div class="breadcrumb" aria-label="Breadcrumb">
+                <a class="nav-link" href="#">Dashboard</a>
+                <span class="breadcrumb-separator text"></span>
+                <a class="nav-link" href="#">Settings</a>
+                <span class="breadcrumb-separator text"></span>
+                <span>Profile</span>
+            </div>
+            
+            <p>Chevron separator:</p>
+            <div class="breadcrumb" aria-label="Breadcrumb">
+                <a class="nav-link" href="#">Docs</a>
+                <span class="breadcrumb-separator chevron"></span>
+                <a class="nav-link" href="#">API</a>
+                <span class="breadcrumb-separator chevron"></span>
+                <span>Reference</span>
+            </div>
+        </section>
+
+        <!-- Typography Section -->
+        <section class="preview-section">
+            <h2>Typography</h2>
+            <h1>Heading 1 - Primary Color</h1>
+            <h2>Heading 2 - Secondary Color</h2>
+            <h3>Heading 3 - Accent Color</h3>
+            <h4>Heading 4 - Default</h4>
+            <h5>Heading 5 - Default</h5>
+            <h6>Heading 6 - Default</h6>
+            
+            <p>This is a regular paragraph with <strong>bold text</strong> and <em>italic text</em>. Here's a <a href="#">link example</a> that changes color on hover.</p>
+            
+            <p class="text-muted">This is muted text using the .text-muted class.</p>
+            
+            <p>
+                <small>This is small text for additional information.</small>
+            </p>
+        </section>
+
+        <!-- Buttons Section -->
+        <section class="preview-section">
+            <h2>Buttons</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+                <button class="btn">Primary Button</button>
+                <button class="btn btn-secondary">Secondary Button</button>
+                <button class="btn btn-ghost">Ghost Button</button>
+                <button class="btn btn-small">Small Button</button>
+                <button class="btn btn-large">Large Button</button>
+            </div>
+        </section>
+
+        <!-- Cards Section -->
+        <section class="preview-section">
+            <h2>Cards</h2>
+            <div class="card">
+                <h3>Standard Card</h3>
+                <p>This is a standard card component with a secondary background and border. It provides good visual separation from the main background.</p>
+                <button class="btn btn-small">Action</button>
+            </div>
+            
+            <div class="elevated-card">
+                <h3>Elevated Card</h3>
+                <p>This elevated card has a tertiary background color and a shadow effect, making it stand out more prominently.</p>
+                <button class="btn btn-secondary btn-small">Learn More</button>
+            </div>
+        </section>
+
+        <!-- Alerts Section -->
+        <section class="preview-section">
+            <h2>Alerts</h2>
+            <div class="alert alert-info">
+                <strong>Info:</strong> This is an informational alert message.
+            </div>
+            <div class="alert alert-success">
+                <strong>Success:</strong> Operation completed successfully!
+            </div>
+            <div class="alert alert-warning">
+                <strong>Warning:</strong> Please review before proceeding.
+            </div>
+            <div class="alert alert-error">
+                <strong>Error:</strong> Something went wrong. Please try again.
+            </div>
+        </section>
+
+        <!-- Badges Section -->
+        <section class="preview-section">
+            <h2>Badges & Status</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                <span class="badge badge-primary">Primary</span>
+                <span class="badge badge-secondary">Secondary</span>
+                <span class="badge badge-success">Success</span>
+                <span class="badge badge-warning">Warning</span>
+                <span class="badge badge-danger">Danger</span>
+                <span class="badge badge-ghost">Ghost</span>
+            </div>
+            <div style="margin-top: 1rem;">
+                <span class="status-success">✓ Active</span> | 
+                <span class="status-warning">⚠ Pending</span> | 
+                <span class="status-error">✗ Failed</span> | 
+                <span class="status-info">ℹ Info</span>
+            </div>
+        </section>
+
+        <!-- Tables Section -->
+        <section class="preview-section">
+            <h2>Tables</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Project Alpha</td>
+                        <td><code>production</code></td>
+                        <td><span class="status-success">Active</span></td>
+                        <td><button class="btn btn-small">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>Project Beta</td>
+                        <td><code>staging</code></td>
+                        <td><span class="status-warning">Pending</span></td>
+                        <td><button class="btn btn-small btn-secondary">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td>Project Gamma</td>
+                        <td><code>development</code></td>
+                        <td><span class="status-info">In Progress</span></td>
+                        <td><button class="btn btn-small btn-ghost">Details</button></td>
+                    </tr>
+                    <tr>
+                        <td>Project Delta</td>
+                        <td><code>archived</code></td>
+                        <td><span class="status-error">Inactive</span></td>
+                        <td><button class="btn btn-small" disabled>Archived</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Forms Section -->
+        <section class="preview-section">
+            <h2>Forms</h2>
+            <form>
+                <div style="margin-bottom: 1rem;">
+                    <label for="input-text">Text Input</label>
+                    <input type="text" id="input-text" placeholder="Enter some text...">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label for="select-option">Select Option</label>
+                    <select id="select-option">
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label for="textarea">Textarea</label>
+                    <textarea id="textarea" rows="4" placeholder="Enter your message..."></textarea>
+                </div>
+                
+                <fieldset>
+                    <legend>Grouped Fields</legend>
+                    <div style="margin-bottom: 1rem;">
+                        <label for="field1">Field 1</label>
+                        <input type="text" id="field1">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label for="field2">Field 2</label>
+                        <input type="text" id="field2">
+                    </div>
+                </fieldset>
+                
+                <div style="margin-top: 1rem;">
+                    <button type="submit" class="btn">Submit</button>
+                    <button type="reset" class="btn btn-ghost">Reset</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Code Blocks Section -->
+        <section class="preview-section">
+            <h2>Code Blocks</h2>
+            <p>Inline code: <code>const theme = 'catppuccin-dark';</code></p>
+            
+            <pre><code>// JavaScript Example
+function initTheme() {
+  const root = document.documentElement;
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  
+  root.setAttribute('data-theme', savedTheme);
+  
+  // Apply theme colors
+  const colors = {
+    primary: '#fb923c',
+    secondary: '#60a5fa',
+    accent: '#f97316'
+  };
+  
+  return colors;
+}</code></pre>
+
+            <pre><code>/* CSS Example */
+.container {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}</code></pre>
+        </section>
+
+        <!-- Lists Section -->
+        <section class="preview-section">
+            <h2>Lists</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h4>Unordered List</h4>
+                    <ul>
+                        <li>First item</li>
+                        <li>Second item with <a href="#">a link</a></li>
+                        <li>Third item with <code>code</code></li>
+                        <li>Fourth item with <strong>bold</strong></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Ordered List</h4>
+                    <ol>
+                        <li>Step one</li>
+                        <li>Step two</li>
+                        <li>Step three</li>
+                        <li>Final step</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Utility Classes Section -->
+        <section class="preview-section">
+            <h2>Utility Classes</h2>
+            <div class="card">
+                <p class="text-primary">Text Primary Color</p>
+                <p class="text-secondary">Text Secondary Color</p>
+                <p class="text-muted">Text Muted Color</p>
+                <p class="text-accent">Text Accent Color</p>
+                <p class="text-success">Text Success Color</p>
+                <p class="text-warning">Text Warning Color</p>
+                <p class="text-danger">Text Danger Color</p>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <div class="bg-secondary p-2 rounded">Secondary BG</div>
+                <div class="bg-tertiary p-2 rounded">Tertiary BG</div>
+                <div class="border p-2 rounded">Default Border</div>
+                <div class="border border-primary p-2 rounded">Primary Border</div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+            <p class="text-center text-muted">
+                Theme Preview &copy; 2024 | Built with Catppuccin Dark Theme
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
