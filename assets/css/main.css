@@ -675,6 +675,19 @@ ul.unstyled, ol.unstyled {
   padding-left: 0;
 }
 
+/* Blog post list items */
+.blog-post-list {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.blog-post-list-item {
+  margin: 0.75rem 0;
+  padding-left: 0.5rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
 /* ===================================
    Dividers
    =================================== */
