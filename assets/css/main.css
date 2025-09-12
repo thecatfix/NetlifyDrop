@@ -293,8 +293,8 @@ pre code {
    =================================== */
 button, .btn {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--secondary);  /* Blue by default */
-  color: #ffffff;  /* White text for contrast */
+  background: var(--secondary) !important;  /* Blue by default */
+  color: #ffffff !important;  /* White text for contrast */
   border: none;
   border-radius: 6px;
   padding: 10px 20px;
@@ -307,10 +307,10 @@ button, .btn {
 }
 
 button:hover, .btn:hover {
-  background: #3b82f6;
+  background: #3b82f6 !important;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(96, 165, 250, 0.3);
-  color: #ffffff;  /* Keep white text on hover */
+  color: #ffffff !important;  /* Keep white text on hover */
   text-decoration: none;
 }
 
@@ -320,37 +320,37 @@ button:active, .btn:active {
 
 /* Primary button variant */
 .btn--primary {
-  background: var(--secondary);  /* Blue instead of orange */
-  color: #ffffff;  /* White text for contrast */
+  background: var(--secondary) !important;  /* Blue instead of orange */
+  color: #ffffff !important;  /* White text for contrast */
 }
 
 .btn--primary:hover {
-  background: #3b82f6;
-  color: #ffffff;
+  background: #3b82f6 !important;
+  color: #ffffff !important;
   box-shadow: 0 4px 8px rgba(96, 165, 250, 0.3);
 }
 
 /* Secondary button variant */
 .btn-secondary, .btn--secondary {
-  background: #4a5568;  /* Gray background */
-  color: #ffffff;
+  background: #4a5568 !important;  /* Gray background */
+  color: #ffffff !important;
 }
 
 .btn-secondary:hover, .btn--secondary:hover {
-  background: #2d3748;
+  background: #2d3748 !important;
   box-shadow: 0 4px 8px rgba(74, 85, 104, 0.3);
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 /* Success button variant */
 .btn--success {
-  background: #48bb78;  /* Softer green */
-  color: #ffffff;  /* White text for better contrast */
+  background: #48bb78 !important;  /* Softer green */
+  color: #ffffff !important;  /* White text for better contrast */
 }
 
 .btn--success:hover {
-  background: #38a169;
-  color: #ffffff;
+  background: #38a169 !important;
+  color: #ffffff !important;
   box-shadow: 0 4px 8px rgba(72, 187, 120, 0.3);
 }
 
