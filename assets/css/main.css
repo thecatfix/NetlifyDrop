@@ -675,7 +675,46 @@ ul.unstyled, ol.unstyled {
   padding-left: 0;
 }
 
-/* Blog post list items */
+/* Blog post content as code block */
+.blog-post-content {
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  padding: 2rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.9rem;
+  color: var(--code-text);
+  line-height: 1.8;
+  margin: 1.5rem 0;
+}
+
+.blog-post-content h3 {
+  color: var(--code-function);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.blog-post-content p {
+  color: var(--code-text);
+  margin: 1rem 0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.blog-post-content strong {
+  color: var(--code-keyword);
+  font-weight: 600;
+}
+
+.blog-post-content .highlight-box {
+  background: rgba(251, 146, 60, 0.05);
+  border: 1px solid rgba(251, 146, 60, 0.2);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Blog post list items within code block */
 .blog-post-list {
   padding-left: 0;
   margin: 1.5rem 0;
@@ -683,28 +722,14 @@ ul.unstyled, ol.unstyled {
 }
 
 .blog-post-list-item {
-  margin: 1rem 0;
-  padding: 1rem 1.5rem;
-  background: var(--code-bg);
-  border: 1px solid var(--code-border);
-  border-radius: 6px;
-  line-height: 1.8;
+  margin: 0.75rem 0;
+  padding: 0.75rem 1rem 0.75rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 3px solid var(--code-keyword);
+  position: relative;
   color: var(--code-text);
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 0.9rem;
-  position: relative;
-  transition: all 0.2s ease;
-}
-
-.blog-post-list-item:hover {
-  background: rgba(22, 27, 34, 0.8);
-  border-color: var(--primary);
-  transform: translateX(4px);
-}
-
-.blog-post-list-item strong {
-  color: var(--code-function);
-  font-weight: 600;
 }
 
 .blog-post-list-item::before {
@@ -713,6 +738,11 @@ ul.unstyled, ol.unstyled {
   left: 0.75rem;
   color: var(--code-keyword);
   font-weight: bold;
+}
+
+.blog-post-list-item strong {
+  color: var(--code-function);
+  font-weight: 600;
 }
 
 /* ===================================
